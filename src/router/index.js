@@ -1,28 +1,62 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from '@/store/index.js';
+import LayoutHome from '@/views/LayoutHome';
+import LayoutSignIn from '@/views/LayoutSignIn';
 
 Vue.use(VueRouter);
 
-const routes = [
+// Middleware for pages that do not require authentication.
+// If authenticated, the user will be sent to the main route.
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+  next('/');
+};
+
+// Middleware for pages that require authentication.
+// If not authenticated, the user will be sent to the signin page.
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+  next('/signin');
+};
+
+// Define all available labs on the main page.
+export const labs = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: 'sim1',
+    component: () =>
+      import(/* webpackChunkName: "sim-1" */ '@/components/sim1.vue')
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: 'sim2',
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "sim-2" */ '@/components/sim2.vue')
   }
 ];
 
 const router = new VueRouter({
-  routes
+  mode: 'history',
+  routes: [
+    {
+      path: '/signin',
+      name: 'sign-in',
+      component: LayoutSignIn,
+      beforeEnter: ifNotAuthenticated
+    },
+    {
+      path: '/',
+      name: 'home',
+      component: LayoutHome,
+      beforeEnter: ifAuthenticated,
+      children: labs
+    }
+  ]
 });
 
 export default router;
