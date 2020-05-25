@@ -42,7 +42,7 @@
 
 <script>
 import { mutations } from '@/store/index';
-import labs from '@/router/labs';
+import { labs } from '@/router';
 
 export default {
   name: 'LayoutMain',
