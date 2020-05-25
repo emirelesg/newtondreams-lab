@@ -8,16 +8,28 @@
 export default {
   name: 'Home',
   components: {},
+  data: () => ({}),
   methods: {
     draw() {
       const canvas = this.$refs.c;
       const parent = this.$refs.parent;
-      canvas.width = parent.clientWidth;
-      canvas.height = parent.clientHeight;
+      canvas.width = parent.clientWidth * (window.devicePixelRatio || 1);
+      canvas.height = parent.clientHeight * (window.devicePixelRatio || 1);
       const ctx = canvas.getContext('2d');
       ctx.fillStyle = 'cyan';
-      ctx.arc(canvas.width / 2, canvas.height / 2, 20, 0, Math.PI * 2);
+      ctx.rect(0, 0, 50, 50);
+      ctx.rect(canvas.width - 50, 0, 50, 50);
+      ctx.rect(canvas.width - 50, canvas.height - 50, 50, 50);
+      ctx.rect(0, canvas.height - 50, 50, 50);
       ctx.fill();
+      ctx.beginPath();
+      ctx.strokeStyle = 'red';
+      ctx.moveTo(0, 0);
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.moveTo(canvas.width, 0);
+      ctx.lineTo(0, canvas.height);
+      ctx.stroke();
+      ctx.beginPath();
     }
   },
   mounted() {

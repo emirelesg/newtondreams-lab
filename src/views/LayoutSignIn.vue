@@ -14,12 +14,14 @@
                     Plataforma digital para prácticas de laboratorio
                   </div>
                 </div>
-                <v-form>
+                <v-form @submit.prevent="signIn" ref="form">
                   <v-text-field
-                    id="password"
                     label="Contraseña"
-                    name="password"
+                    autocomplete="off"
+                    ref="password"
+                    :error-messages="errors"
                     type="password"
+                    v-model="password"
                     append-icon="mdi-lock"
                     autofocus
                   ></v-text-field>
@@ -31,7 +33,7 @@
                   Regresar
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">
+                <v-btn color="primary" @click="signIn" :disabled="!password">
                   Acceder
                   <v-icon right>mdi-arrow-right</v-icon>
                 </v-btn>
@@ -45,8 +47,33 @@
 </template>
 
 <script>
+import { actions } from '@/store/index.js';
+
 export default {
   name: 'LayoutSignIn',
-  data: () => ({})
+  data: () => ({
+    errors: [],
+    password: null
+  }),
+  watch: {
+    password() {
+      if (this.errors.length) this.errors = [];
+    }
+  },
+  methods: {
+    signIn() {
+      if (this.password) {
+        if (actions.authenticate(this.password)) {
+          this.$router.push({ name: 'home' });
+        } else {
+          this.$refs.form.reset();
+          this.$refs.password.focus();
+          this.$nextTick(() => {
+            this.errors = ['Contraseña incorrecta'];
+          });
+        }
+      }
+    }
+  }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height pa-0" fluid ref="parent">
+  <v-container fuild ref="parent">
     <canvas class="full-screen" ref="c"></canvas>
   </v-container>
 </template>
@@ -8,16 +8,30 @@
 export default {
   name: 'Home',
   components: {},
+  data: () => ({}),
   methods: {
     draw() {
       const canvas = this.$refs.c;
-      const parent = this.$refs.parent;
-      canvas.width = parent.clientWidth;
-      canvas.height = parent.clientHeight;
+      const dpr = window.devicePixelRatio || 1;
+      const { width, height } = canvas.getBoundingClientRect();
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
       const ctx = canvas.getContext('2d');
-      ctx.fillStyle = 'red';
-      ctx.arc(canvas.width / 2, canvas.height / 2, 20, 0, Math.PI * 2);
+      ctx.scale(dpr, dpr);
+      ctx.fillStyle = `hsl(${Math.random() * 360}, 50%, 50%)`;
+      ctx.rect(0, 0, 50, 50);
+      ctx.rect(width - 50, 0, 50, 50);
+      ctx.rect(width - 50, height - 50, 50, 50);
+      ctx.rect(0, height - 50, 50, 50);
       ctx.fill();
+      ctx.beginPath();
+      ctx.strokeStyle = 'red';
+      ctx.moveTo(0, 0);
+      ctx.lineTo(width, height);
+      ctx.moveTo(width, 0);
+      ctx.lineTo(0, height);
+      ctx.stroke();
+      ctx.beginPath();
     }
   },
   mounted() {

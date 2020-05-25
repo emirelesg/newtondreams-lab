@@ -10,7 +10,19 @@ export default {
 </script>
 
 <style>
-/* .app {
+html,
+body {
+  /* height: 100%; */
+}
+html {
+  /* Remove scroll bar https://github.com/vuetifyjs/vuetify/issues/864 */
+  overflow-y: auto !important;
+}
+.v-application--wrap {
+  /* min-height: inherit !important; */
+}
+.app {
+  height: 100%;
   background: #efefef !important;
-} */
+}
 </style>
