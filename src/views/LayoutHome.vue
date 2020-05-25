@@ -3,10 +3,15 @@
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
         <v-list-item-group active-class="primary--text">
-          <v-list-item link :to="lab.path" v-for="lab in labs" :key="lab.path">
+          <v-list-item
+            link
+            :to="lab.path"
+            v-for="(lab, i) in labs"
+            :key="lab.path"
+          >
             <v-list-item-content>
               <v-list-item-title class="font-weight-regular">
-                {{ lab.name }}
+                {{ i + 1 }}. {{ lab.name }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -24,6 +29,7 @@
         target="_blank"
         href="https://udem.edu.mx/es"
         v-if="$vuetify.breakpoint.smAndUp"
+        class="ml-1"
       >
         <v-img alt="Logo UDEM" width="62" contain src="@/assets/LogoUdem.png" />
       </a>

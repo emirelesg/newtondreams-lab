@@ -18,6 +18,11 @@ export default {
       canvas.height = height * dpr;
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
+      ctx.beginPath();
+      ctx.fillStyle = 'black';
+      ctx.rect(0, 0, width, height);
+      ctx.fill();
+      ctx.beginPath();
       ctx.fillStyle = `hsl(${Math.random() * 360}, 50%, 50%)`;
       ctx.rect(0, 0, 50, 50);
       ctx.rect(width - 50, 0, 50, 50);
@@ -31,7 +36,6 @@ export default {
       ctx.moveTo(width, 0);
       ctx.lineTo(0, height);
       ctx.stroke();
-      ctx.beginPath();
     }
   },
   mounted() {
@@ -47,6 +51,7 @@ export default {
 <style scoped>
 .full-screen {
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
