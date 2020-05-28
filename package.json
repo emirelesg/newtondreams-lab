@@ -42,7 +42,9 @@
       "@vue/prettier"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "babel-eslint",
+      "ecmaVersion": 2018,
+      "allowImportExportEverywhere": true
     },
     "rules": {
       "prettier/prettier": [

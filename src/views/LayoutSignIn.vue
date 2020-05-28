@@ -28,7 +28,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="secondary" text>
+                <v-btn color="secondary" text @click="goBack">
                   <v-icon left>mdi-arrow-left</v-icon>
                   Regresar
                 </v-btn>
@@ -61,6 +61,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      this.$router.back();
+    },
     signIn() {
       if (this.password) {
         if (actions.authenticate(this.password)) {

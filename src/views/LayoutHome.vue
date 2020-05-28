@@ -18,7 +18,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="primary" dark app clipped-left fixed>
+    <v-app-bar color="primary" dark app clipped-left fixed elevation="4">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>NewtonDreams <strong>Lab</strong></v-toolbar-title>
       <v-spacer></v-spacer>
@@ -37,7 +37,7 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer app class="secondary--text grey lighten-3 caption ">
+    <v-footer app class="secondary--text grey lighten-3 caption" elevation="4">
       <span>
         Universidad de Monterrey &copy; 2014 -
         {{ new Date().getFullYear() }}

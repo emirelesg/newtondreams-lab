@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { getters } from '@/store/index.js';
+import { getters } from '@/store/index';
 import LayoutHome from '@/views/LayoutHome';
 import LayoutSignIn from '@/views/LayoutSignIn';
 
@@ -42,7 +42,8 @@ export const labs = [
 ];
 
 const router = new VueRouter({
-  // mode: 'history',
+  mode: 'history',
+  base: process.env.NODE_ENV === 'production' ? '/lab/' : '/',
   scrollBehavior() {
     return { x: 0, y: 0 };
   },

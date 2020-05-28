@@ -25,4 +25,7 @@ html {
   height: 100%;
   background: #efefef !important;
 }
+canvas {
+  background-color: #ffffff;
+}
 </style>
