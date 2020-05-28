@@ -8,7 +8,7 @@
 import p$ from 'newtondreams-lib';
 
 export default {
-  name: 'Sim1',
+  name: 'Sim2',
   components: {},
   data: () => ({
     w: null
@@ -24,33 +24,7 @@ export default {
     resize() {
       this.w.axis.setPosition(this.w.width / 4, this.w.height / 2);
     },
-    draw() {
-      // const canvas = this.$refs.c;
-      // const dpr = window.devicePixelRatio || 1;
-      // const { width, height } = canvas.getBoundingClientRect();
-      // canvas.width = width * dpr;
-      // canvas.height = height * dpr;
-      // const ctx = canvas.getContext('2d');
-      // ctx.scale(dpr, dpr);
-      // ctx.beginPath();
-      // ctx.fillStyle = 'black';
-      // ctx.rect(0, 0, width, height);
-      // ctx.fill();
-      // ctx.beginPath();
-      // ctx.fillStyle = `hsl(${Math.random() * 360}, 50%, 50%)`;
-      // ctx.rect(0, 0, 50, 50);
-      // ctx.rect(width - 50, 0, 50, 50);
-      // ctx.rect(width - 50, height - 50, 50, 50);
-      // ctx.rect(0, height - 50, 50, 50);
-      // ctx.fill();
-      // ctx.beginPath();
-      // ctx.strokeStyle = 'red';
-      // ctx.moveTo(0, 0);
-      // ctx.lineTo(width, height);
-      // ctx.moveTo(width, 0);
-      // ctx.lineTo(0, height);
-      // ctx.stroke();
-    }
+    draw() {}
   },
   mounted() {
     this.$nextTick(() => this.setup());
@@ -58,15 +32,3 @@ export default {
   destroyed() {}
 };
 </script>
-
-<style scoped>
-.full-screen {
-  position: absolute;
-  user-select: none;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-</style>
