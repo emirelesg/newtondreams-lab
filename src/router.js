@@ -49,17 +49,25 @@ const router = new VueRouter({
   },
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: LayoutHome,
+      beforeEnter: ifAuthenticated,
+      children: labs
+    },
+    {
       path: '/sign-in',
       name: 'sign-in',
       component: LayoutSignIn,
       beforeEnter: ifNotAuthenticated
     },
     {
-      path: '/',
-      name: 'home',
-      component: LayoutHome,
-      beforeEnter: ifAuthenticated,
-      children: labs
+      path: '*',
+      name: 'wildcard',
+      beforeEnter: (to, from, next) => {
+        next('/');
+        return;
+      }
     }
   ]
 });
