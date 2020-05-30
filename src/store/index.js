@@ -1,7 +1,9 @@
 import Vue from 'vue';
 
 export const state = Vue.observable({
-  token: localStorage.getItem('device')
+  token: localStorage.getItem('device'),
+  renderer: null,
+  drawer: false
 });
 
 export const getters = {
@@ -16,6 +18,15 @@ export const mutations = {
   clearToken: () => {
     localStorage.removeItem('device');
     state.token = null;
+  },
+  setRenderer: renderer => {
+    state.renderer = renderer;
+  },
+  setDrawer: val => {
+    state.drawer = val;
+  },
+  toggleDrawer: () => {
+    state.drawer = !state.drawer;
   }
 };
 

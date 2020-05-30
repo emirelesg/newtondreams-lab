@@ -26,15 +26,17 @@ html {
   background: #efefef !important;
 }
 canvas {
-  background-color: #ffffff;
+  outline: none;
 }
-.full-screen {
+/* #scene {
   position: absolute;
-  user-select: none;
-  z-index: 1;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
 }
+#scene canvas {
+  user-select: none;
+  z-index: 1;
+} */
 </style>

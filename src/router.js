@@ -38,6 +38,12 @@ export const labs = [
     path: 'trabajo',
     component: () =>
       import(/* webpackChunkName: "lab.2" */ '@/components/sim2.vue')
+  },
+  {
+    name: 'Three Js',
+    path: 'three',
+    component: () =>
+      import(/* webpackChunkName: "lab.3" */ '@/components/sim3.vue')
   }
 ];
 
