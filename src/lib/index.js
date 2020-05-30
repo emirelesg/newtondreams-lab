@@ -85,11 +85,8 @@ class App {
     this.renderer.render(this.scene, this.camera);
   }
   onWindowResize(force) {
-    // const width = 100;
-    // const height = 100;
     const width = this.container.clientWidth;
     const height = this.container.clientHeight;
-    console.log(height);
     if (force || this.size.x !== width || this.size.y !== height) {
       this.size.set(width, height);
       this.renderer.setSize(width, height);
