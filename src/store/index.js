@@ -3,7 +3,8 @@ import Vue from 'vue';
 export const state = Vue.observable({
   token: localStorage.getItem('device'),
   renderer: null,
-  drawer: false
+  drawer: false,
+  activeWindow: null
 });
 
 export const getters = {
@@ -27,6 +28,9 @@ export const mutations = {
   },
   toggleDrawer: () => {
     state.drawer = !state.drawer;
+  },
+  setActiveWindow: win => {
+    state.activeWindow = win;
   }
 };
 

@@ -14,7 +14,7 @@ export default new Vuetify({
     options: {},
     themes: {
       light: {
-        primary: colors.indigo.accent4,
+        primary: colors.pink.accent4,
         secondary: colors.grey.darken1
       }
     }

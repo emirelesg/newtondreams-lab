@@ -6,6 +6,7 @@
       <v-sheet class="full-screen">
         <app-toolbar></app-toolbar>
         <div class="fill-height">
+          <window-wrapper></window-wrapper>
           <router-view></router-view>
         </div>
       </v-sheet>
@@ -19,6 +20,7 @@ import AppToolbar from '@/components/AppToolbar';
 import AppFooter from '@/components/AppFooter';
 import AppHeader from '@/components/AppHeader';
 import AppNavigation from '@/components/AppNavigation';
+import WindowWrapper from '@/components/window/WindowWrapper';
 
 export default {
   name: 'LayoutMain',
@@ -26,7 +28,8 @@ export default {
     AppToolbar,
     AppFooter,
     AppHeader,
-    AppNavigation
+    AppNavigation,
+    WindowWrapper
   },
   data: () => ({})
 };
