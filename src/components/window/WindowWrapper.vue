@@ -1,6 +1,6 @@
 <template>
   <div class="window">
-    <component :is="currentWindow"></component>
+    <component :is="windowComponent"></component>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
     WindowChart
   },
   data: () => ({
-    currentWindow: null
+    windowComponent: null
   }),
   watch: {
     activeWindow() {
@@ -28,15 +28,12 @@ export default {
   },
   methods: {
     set() {
-      switch (this.activeWindow) {
-        case 0:
-          this.currentWindow = WindowData;
-          break;
-        case 1:
-          this.currentWindow = WindowChart;
-          break;
-        default:
-          this.currentWindow = null;
+      if (this.activeWindow === 0) {
+        this.windowComponent = WindowData;
+      } else if (this.activeWindow === 1) {
+        this.windowComponent = WindowChart;
+      } else {
+        this.windowComponent = null;
       }
     }
   },
