@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer @input="setDrawer" :value="drawer" app clipped>
+  <v-navigation-drawer @input="setNavDrawer" :value="navDrawer" app clipped>
     <v-list dense>
       <v-list-item-group active-class="primary--text">
         <v-list-item
@@ -29,10 +29,10 @@ export default {
     labs
   }),
   methods: {
-    setDrawer: mutations.setDrawer
+    setNavDrawer: mutations.setNavDrawer
   },
   computed: {
-    drawer: () => state.drawer
+    navDrawer: () => state.navDrawer
   }
 };
 </script>

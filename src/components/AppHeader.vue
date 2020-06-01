@@ -1,6 +1,6 @@
 <template>
   <v-app-bar color="primary" dark app clipped-left fixed elevation="0">
-    <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click.stop="toggleNavDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title>NewtonDreams <strong>Lab</strong></v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn dark icon @click="signOut">
@@ -24,7 +24,7 @@ export default {
   name: 'AppHeader',
   data: () => ({}),
   methods: {
-    toggleDrawer: mutations.toggleDrawer,
+    toggleNavDrawer: mutations.toggleNavDrawer,
     signOut() {
       mutations.clearToken();
       this.$router.push({ name: 'sign-in' });
