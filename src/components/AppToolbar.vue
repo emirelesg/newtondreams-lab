@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="toolbar">
+  <v-sheet tile class="toolbar background border-bottom">
     <div class="toolbar-container">
       <v-btn color="green--text">
         <v-icon>mdi-play</v-icon>
@@ -27,9 +27,6 @@ export default {
 <style scoped>
 .toolbar {
   height: 56px;
-  background-color: #f5f7fa !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
-  border-width: thin;
 }
 
 .toolbar-container {
@@ -45,7 +42,6 @@ export default {
   box-shadow: none !important;
   border-radius: 0;
   text-transform: none;
-  color: rgba(0, 0, 0, 0.6);
 }
 
 .toolbar-container >>> button .v-btn__content span {

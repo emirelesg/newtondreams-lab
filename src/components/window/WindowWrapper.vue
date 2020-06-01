@@ -50,6 +50,7 @@ export default {
   right: 0;
   z-index: 1;
   width: 50%;
+  opacity: 1;
 }
 .window div {
   margin: 16px;

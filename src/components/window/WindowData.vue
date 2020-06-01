@@ -5,7 +5,7 @@
       :items="sampleTimes"
       label="Tiempo de muestreo"
     ></v-select>
-    <v-simple-table fixed-header height="300px" class="data-table">
+    <v-simple-table fixed-header height="300px" class="data-table border">
       <template v-slot:default>
         <thead>
           <tr>
@@ -63,10 +63,6 @@ export default {
 </script>
 
 <style scoped>
-.data-table {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-width: thin;
-}
 .data-table thead tr th div:first-child {
   display: flex;
   align-items: center;

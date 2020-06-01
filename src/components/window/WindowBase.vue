@@ -1,7 +1,7 @@
 <template>
-  <v-card elevation="7">
-    <v-card-title>
-      <span class="headline">{{ title }}</span>
+  <v-card flat class="border">
+    <v-card-title class="">
+      <span class="font-weight-regular">{{ title }}</span>
       <v-spacer></v-spacer>
       <v-btn icon color="secondary" @click="close">
         <v-icon size="20">mdi-close</v-icon>

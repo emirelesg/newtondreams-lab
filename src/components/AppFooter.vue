@@ -1,5 +1,9 @@
 <template>
-  <v-footer app class="secondary--text footer caption" elevation="0">
+  <v-footer
+    app
+    class="secondary--text footer caption border-top background"
+    elevation="0"
+  >
     <span>
       Universidad de Monterrey &copy; 2014 -
       {{ new Date().getFullYear() }}
@@ -16,9 +20,6 @@ export default {
 
 <style scoped>
 .footer {
-  background-color: #f5f7fa !important;
-  border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
-  border-width: thin;
   bottom: -1px !important;
 }
 </style>

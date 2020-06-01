@@ -4,7 +4,8 @@ export const state = Vue.observable({
   token: localStorage.getItem('device'),
   renderer: null,
   navDrawer: false,
-  activeWindow: null
+  activeWindow: null,
+  signals: {}
 });
 
 export const getters = {

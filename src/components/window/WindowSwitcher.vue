@@ -4,7 +4,7 @@
       v-for="(window, i) in windows"
       :key="window.name"
       @click="onWindowChange(i)"
-      :color="i === active ? 'primary--text' : ''"
+      :color="i === active ? 'primary--text' : 'secondary--text'"
     >
       <v-icon>{{ window.icon }}</v-icon>
       <span>{{ window.name }}</span>

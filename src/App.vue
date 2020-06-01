@@ -28,4 +28,21 @@ html {
 canvas {
   outline: none;
 }
+
+.background {
+  background-color: #f5f7fa !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-width: thin;
+}
+.border-top {
+  border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-width: thin;
+}
+.border {
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-width: thin;
+}
 </style>

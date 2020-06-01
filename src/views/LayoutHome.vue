@@ -3,7 +3,7 @@
     <app-navigation></app-navigation>
     <app-header></app-header>
     <v-content>
-      <v-sheet class="full-screen">
+      <v-sheet tile class="full-screen">
         <app-toolbar></app-toolbar>
         <div class="fill-height">
           <window-wrapper></window-wrapper>
