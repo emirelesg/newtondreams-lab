@@ -15,7 +15,7 @@ const ifNotAuthenticated = (to, from, next) => {
   }
   next('/');
 };
-1;
+
 // Middleware for pages that require authentication.
 // If not authenticated, the user will be sent to the signin page.
 const ifAuthenticated = (to, from, next) => {
@@ -31,21 +31,28 @@ export const labs = [
     name: 'Velocidad',
     path: 'velocidad',
     component: () =>
-      import(/* webpackChunkName: "lab.1" */ '@/components/sim1.vue'),
+      import(/* webpackChunkName: "lab.1" */ '@/simulations/01.vue'),
     beforeEnter: actions.cleanup
   },
   {
     name: 'Trabajo',
     path: 'trabajo',
     component: () =>
-      import(/* webpackChunkName: "lab.2" */ '@/components/sim2.vue'),
+      import(/* webpackChunkName: "lab.2" */ '@/simulations/02.vue'),
     beforeEnter: actions.cleanup
   },
   {
     name: 'Three Js',
     path: 'three',
     component: () =>
-      import(/* webpackChunkName: "lab.3" */ '@/components/sim3.vue'),
+      import(/* webpackChunkName: "lab.3" */ '@/simulations/03.vue'),
+    beforeEnter: actions.cleanup
+  },
+  {
+    name: 'Three Js 2',
+    path: 'three2',
+    component: () =>
+      import(/* webpackChunkName: "lab.4" */ '@/simulations/04.vue'),
     beforeEnter: actions.cleanup
   }
 ];
@@ -80,5 +87,14 @@ const router = new VueRouter({
     }
   ]
 });
+
+// router.beforeResolve((to, from, next) => {
+//   console.log('router.start');
+//   next();
+// });
+
+// router.afterEach(() => {
+//   console.log('router.end');
+// });
 
 export default router;

@@ -24,6 +24,7 @@ export const getters = {
 };
 
 export const mutations = {
+  // Set auth state.
   setToken: token => {
     localStorage.setItem('device', token);
     state.token = token;
@@ -32,6 +33,7 @@ export const mutations = {
     localStorage.removeItem('device');
     state.token = null;
   },
+  // Set app state.
   setRenderer: renderer => {
     state.renderer = renderer;
   },

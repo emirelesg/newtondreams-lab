@@ -65,6 +65,7 @@ export default {
           mutations.stopSim();
         }
       }
+      this.app.controls.update();
       this.app.renderer.render(this.app.scene, this.app.camera);
     },
     simulate(dt) {
@@ -96,6 +97,8 @@ export default {
     state.bus.$on('reset', this.reset);
   },
   beforeDestroy() {
+    this.box.destroy();
+    this.box = null;
     this.app.destroy();
     this.app = null;
     state.bus.$off('reset', this.reset);

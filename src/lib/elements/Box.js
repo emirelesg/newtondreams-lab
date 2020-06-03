@@ -7,6 +7,8 @@ import {
   AxesHelper
 } from 'three';
 
+import { disposeRecursive } from '@/lib/utils';
+
 class Box extends Object3D {
   constructor() {
     super();
@@ -29,6 +31,9 @@ class Box extends Object3D {
     this.add(new AxesHelper(4));
 
     this.position.y = 0.1;
+  }
+  destroy() {
+    disposeRecursive(this);
   }
 }
 

@@ -19,7 +19,7 @@ class App {
     Object.assign(this.opts, opts);
     this.container = container;
     this.size = new Vector2();
-    this.camera = new PerspectiveCamera(100, 1, 0.1, 1000);
+    this.camera = new PerspectiveCamera(60, 1, 0.1, 1000);
     this.scene = new Scene();
 
     // Load renderer from store or create a new one.
@@ -37,9 +37,12 @@ class App {
 
     // Configure controls.
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.07;
     this.controls.maxPolarAngle = Math.PI / 2;
-    this.camera.position.set(15, 20, 25);
-    this.controls.target = new Vector3(0, 0.1, 0);
+    // this.camera.position.set(15, 20, 25);
+    this.camera.position.set(0, 50, 50);
+    this.controls.target = new Vector3(0, 0, 0);
     this.controls.update();
 
     // Init scene.

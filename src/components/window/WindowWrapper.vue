@@ -22,14 +22,14 @@ export default {
   }),
   watch: {
     activeWindow() {
-      this.set();
+      this.init();
     }
   },
   mounted() {
-    this.set();
+    this.init();
   },
   methods: {
-    set() {
+    init() {
       if (this.activeWindow === 0) {
         this.windowComponent = WindowData;
       } else if (this.activeWindow === 1) {
