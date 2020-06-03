@@ -5,7 +5,18 @@ export const state = Vue.observable({
   renderer: null,
   navDrawer: false,
   activeWindow: null,
-  signals: {}
+  sim: {
+    sampleTime: null,
+    signals: [],
+    data: [],
+    displayLimit: 0,
+    isRunning: false
+  },
+  controls: {
+    start: true,
+    reset: false
+  },
+  bus: new Vue()
 });
 
 export const getters = {
@@ -32,6 +43,36 @@ export const mutations = {
   },
   setActiveWindow: win => {
     state.activeWindow = win;
+  },
+  // Following mutations have to do with the simulation.
+  setSimSignals: signals => {
+    state.sim.signals = signals || [];
+  },
+  setSimSampleTime: dt => {
+    state.sim.sampleTime = dt;
+  },
+  setSimData: data => {
+    state.sim.data = data || [];
+  },
+  updateSimDisplayLimit: t => {
+    state.sim.displayLimit = Math.floor(t / state.sim.sampleTime);
+  },
+  startSim: () => {
+    state.sim.isRunning = true;
+    state.controls.reset = true;
+    state.controls.start = false;
+  },
+  stopSim: () => {
+    state.sim.isRunning = false;
+    state.sim.displayLimit = state.sim.data.length;
+  },
+  resetSim: () => {
+    state.sim.isRunning = false;
+    state.controls.reset = false;
+    state.controls.start = true;
+    state.sim.data = [];
+    state.sim.displayLimit = 0;
+    state.bus.$emit('reset');
   }
 };
 
@@ -48,5 +89,23 @@ export const actions = {
       return true;
     }
     return false;
+  },
+  cleanup: (to, from, next) => {
+    // Router guard called before entering a simulations.
+    // Here is the configuration of values that should only be
+    // set once.
+    mutations.setActiveWindow(null);
+    mutations.setSimSampleTime(1 / 50);
+
+    // Must first clear the limit. That way for loops that rely on this
+    // do not count up. Then clear data and signals.
+    mutations.updateSimDisplayLimit(0);
+    mutations.setSimData(null);
+    mutations.setSimSignals(null);
+
+    // Since all windows use 'keep-alive' signal them to
+    // reset their respective properties.
+    state.bus.$emit('resetWindow');
+    next();
   }
 };

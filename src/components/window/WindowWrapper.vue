@@ -1,6 +1,8 @@
 <template>
   <div class="window">
-    <component :is="windowComponent"></component>
+    <keep-alive>
+      <component :is="windowComponent"></component>
+    </keep-alive>
   </div>
 </template>
 

@@ -1,14 +1,22 @@
 <template>
   <window-base title="Gráfica">
     <div class="wrapper">
-      <div class="var-y"><signal-selector></signal-selector></div>
+      <div class="var-y">
+        <signal-selector
+          v-model="varY"
+          :signals="otherSignals"
+        ></signal-selector>
+      </div>
       <div class="chart"></div>
     </div>
-    <div class="var-x"><signal-selector></signal-selector></div>
+    <div class="var-x">
+      <signal-selector v-model="varX" :signals="timeSignals"></signal-selector>
+    </div>
   </window-base>
 </template>
 
 <script>
+import { state } from '@/store/index';
 import WindowBase from '@/components/window/WindowBase';
 import SignalSelector from '@/components/window/SignalSelector';
 
@@ -18,13 +26,41 @@ export default {
     WindowBase,
     SignalSelector
   },
-  data: () => ({})
+  data: () => ({
+    varX: null,
+    varY: null
+  }),
+  watch: {
+    varX() {
+      this.reset();
+    },
+    varY() {
+      this.reset();
+    }
+  },
+  methods: {
+    reset() {
+      if (this.varX === null || this.varY === null) return;
+      const x = this.timeSignals[this.varX];
+      const y = this.otherSignals[this.varY];
+      x;
+      y;
+    }
+  },
+  mounted() {
+    this.reset();
+  },
+  computed: {
+    timeSignals: () => state.sim.signals.filter(s => s.isTime),
+    otherSignals: () => state.sim.signals.filter(s => !s.isTime),
+    datapoints: () => state.sim.data,
+    limit: () => state.sim.displayLimit
+  }
 };
 </script>
 
 <style scoped>
 .chart {
-  background-color: lavender;
   height: 300px;
   width: 100%;
 }

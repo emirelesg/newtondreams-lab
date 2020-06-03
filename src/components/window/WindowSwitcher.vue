@@ -1,10 +1,11 @@
 <template>
   <div class="window-switcher">
     <v-btn
+      text
       v-for="(window, i) in windows"
       :key="window.name"
       @click="onWindowChange(i)"
-      :color="i === active ? 'primary--text' : 'secondary--text'"
+      :color="i === active ? 'primary' : 'secondary'"
     >
       <v-icon>{{ window.icon }}</v-icon>
       <span>{{ window.name }}</span>

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mutations } from '@/store/index';
 import p$ from 'newtondreams-lib';
 
 export default {
@@ -27,7 +28,10 @@ export default {
     draw() {}
   },
   mounted() {
-    this.$nextTick(() => this.setup());
+    this.$nextTick(() => {
+      this.setup();
+      mutations.resetSim();
+    });
   },
   destroyed() {}
 };

@@ -16,3 +16,8 @@ export function disposeRecursive(obj) {
     obj = null;
   }
 }
+
+export function round(val, places) {
+  const k = Math.pow(10, places);
+  return Math.round(val * k) / k;
+}

@@ -1,9 +1,13 @@
 <template>
   <v-sheet tile class="toolbar background border-bottom">
     <div class="toolbar-container">
-      <v-btn color="green--text">
+      <v-btn :disabled="!controls.start" text color="green" @click="startSim">
         <v-icon>mdi-play</v-icon>
         <span>Simular</span>
+      </v-btn>
+      <v-btn text :disabled="!controls.reset" color="primary" @click="resetSim">
+        <v-icon>mdi-refresh</v-icon>
+        <span>Reconfigurar</span>
       </v-btn>
       <v-divider class="mx-4" vertical></v-divider>
       <window-switcher></window-switcher>
@@ -13,6 +17,7 @@
 </template>
 
 <script>
+import { state, mutations } from '@/store/index';
 import WindowSwitcher from '@/components/window/WindowSwitcher';
 
 export default {
@@ -20,7 +25,14 @@ export default {
   components: {
     WindowSwitcher
   },
-  data: () => ({})
+  data: () => ({}),
+  methods: {
+    startSim: mutations.startSim,
+    resetSim: mutations.resetSim
+  },
+  computed: {
+    controls: () => state.controls
+  }
 };
 </script>
 
@@ -42,6 +54,10 @@ export default {
   box-shadow: none !important;
   border-radius: 0;
   text-transform: none;
+}
+
+.toolbar-container >>> button:disabled {
+  background-color: rgba(0, 0, 0, 0.03) !important;
 }
 
 .toolbar-container >>> button .v-btn__content span {

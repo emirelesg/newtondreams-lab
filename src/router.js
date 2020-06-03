@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import { getters } from '@/store/index';
+import { getters, actions } from '@/store/index';
 import LayoutHome from '@/views/LayoutHome';
 import LayoutSignIn from '@/views/LayoutSignIn';
 
@@ -31,19 +31,22 @@ export const labs = [
     name: 'Velocidad',
     path: 'velocidad',
     component: () =>
-      import(/* webpackChunkName: "lab.1" */ '@/components/sim1.vue')
+      import(/* webpackChunkName: "lab.1" */ '@/components/sim1.vue'),
+    beforeEnter: actions.cleanup
   },
   {
     name: 'Trabajo',
     path: 'trabajo',
     component: () =>
-      import(/* webpackChunkName: "lab.2" */ '@/components/sim2.vue')
+      import(/* webpackChunkName: "lab.2" */ '@/components/sim2.vue'),
+    beforeEnter: actions.cleanup
   },
   {
     name: 'Three Js',
     path: 'three',
     component: () =>
-      import(/* webpackChunkName: "lab.3" */ '@/components/sim3.vue')
+      import(/* webpackChunkName: "lab.3" */ '@/components/sim3.vue'),
+    beforeEnter: actions.cleanup
   }
 ];
 
