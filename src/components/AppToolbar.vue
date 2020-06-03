@@ -45,7 +45,7 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: flex-start;
 }
 
 .toolbar-container >>> button {
