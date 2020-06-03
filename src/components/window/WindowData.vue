@@ -1,5 +1,5 @@
 <template>
-  <window-base title="Datos">
+  <window-base title="Datos" v-if="isActive">
     <sample-time-selector></sample-time-selector>
     <v-simple-table fixed-header height="300px" class="data-table border">
       <template v-slot:default>
@@ -40,7 +40,7 @@
               v-for="(signal, idy) in selectedSignals"
               :key="`row-${idx}-col-${idy}`"
             >
-              {{ datapoints[idx][signals[signal].var] }}
+              {{ signals[signal] ? datapoints[idx][signals[signal].var] : '' }}
             </td>
             <td></td>
           </tr>
@@ -64,7 +64,8 @@ export default {
     SampleTimeSelector
   },
   data: () => ({
-    selectedSignals: [null]
+    selectedSignals: [null],
+    isActive: false
   }),
   methods: {
     addSignal() {
@@ -83,9 +84,11 @@ export default {
     limit: () => state.sim.displayLimit
   },
   activated() {
+    this.isActive = true;
     state.bus.$on('resetWindow', this.reset);
   },
   deactivated() {
+    this.isActive = false;
     state.bus.$off('resetWindow', this.reset);
   }
 };

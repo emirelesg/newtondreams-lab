@@ -80,7 +80,9 @@ export default {
     varX: null,
     varY: null,
     xValues: [],
-    yValues: []
+    yValues: [],
+    isActive: false,
+    needsInit: false
   }),
   watch: {
     varX() {
@@ -98,10 +100,18 @@ export default {
   },
   methods: {
     update() {
+      if (!this.isActive) return;
+
       this.data.datasets[0].data = this.yValues.slice(0, this.limit);
       this.$refs.chart.update();
     },
     init() {
+      if (!this.isActive) {
+        this.needsInit = true;
+        return;
+      }
+      this.needsInit = false;
+
       // Set dataset color to match the primary color.
       this.$refs.chart.color(0, this.$vuetify.theme.themes.light.primary);
 
@@ -132,7 +142,17 @@ export default {
     }
   },
   activated() {
-    this.$nextTick(() => this.update());
+    this.isActive = true;
+    this.$nextTick(() => {
+      if (this.needsInit) {
+        this.init();
+      } else {
+        this.update();
+      }
+    });
+  },
+  deactivated() {
+    this.isActive = false;
   },
   computed: {
     timeSignals: () => state.sim.signals.filter(s => s.isTime),
