@@ -8,7 +8,11 @@
         v-on="scope.on"
         class="selector-btn"
       >
-        {{ value !== null ? signals[value].name : 'Sin señales' }}
+        {{
+          value !== null
+            ? `${signals[value].name} (${signals[value].units})`
+            : 'Sin señales'
+        }}
         <v-icon right size="20">
           {{ scope.value ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
         </v-icon>
@@ -21,7 +25,9 @@
         mandatory
       >
         <v-list-item v-for="(signal, idx) in signals" :value="idx" :key="idx">
-          <v-list-item-title>{{ signal.name }}</v-list-item-title>
+          <v-list-item-title>
+            {{ signal.name }} ({{ signal.units }})
+          </v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -38,14 +44,17 @@ export default {
   data: () => ({}),
   watch: {
     signals() {
-      this.reset();
+      this.init();
     }
   },
   mounted() {
-    this.reset();
+    this.init();
   },
   methods: {
-    reset() {
+    init() {
+      // All signal selectors start with the value of null. Once signals are loaded,
+      // and current value is null, the first element is selected.
+      // If no signals are found, then the value is set to null.
       if (this.signals.length > 0) {
         if (this.value === null) {
           this.$emit('input', 0);
