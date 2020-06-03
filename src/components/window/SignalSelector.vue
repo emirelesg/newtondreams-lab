@@ -3,16 +3,12 @@
     <template v-slot:activator="scope">
       <v-btn
         small
-        :color="value !== null ? 'primary' : 'secondary'"
+        :color="validSelection ? 'primary' : 'secondary'"
         outlined
         v-on="scope.on"
         class="selector-btn"
       >
-        {{
-          value !== null
-            ? `${signals[value].name} (${signals[value].units})`
-            : 'Sin señales'
-        }}
+        {{ validSelection ? getLabel(signals[value]) : 'Sin señales' }}
         <v-icon right size="20">
           {{ scope.value ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
         </v-icon>
@@ -26,7 +22,7 @@
       >
         <v-list-item v-for="(signal, idx) in signals" :value="idx" :key="idx">
           <v-list-item-title>
-            {{ signal.name }} ({{ signal.units }})
+            {{ getLabel(signal) }}
           </v-list-item-title>
         </v-list-item>
       </v-list-item-group>
@@ -62,6 +58,9 @@ export default {
       } else {
         this.$emit('input', null);
       }
+    },
+    getLabel({ name, units }) {
+      return `${name} (${units})`;
     }
   },
   computed: {
@@ -72,6 +71,9 @@ export default {
       set: function(newSignal) {
         this.$emit('input', newSignal);
       }
+    },
+    validSelection() {
+      return this.value !== null && this.signals[this.value];
     }
   }
 };
