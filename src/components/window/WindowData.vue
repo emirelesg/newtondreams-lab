@@ -40,10 +40,7 @@
               v-for="(signal, idy) in selectedSignals"
               :key="`row-${idx}-col-${idy}`"
             >
-              <span>{{ datapoints[idx][signals[signal].var] }}</span>
-              <span class="units secondary--text ml-1">
-                {{ signals[signal].units }}
-              </span>
+              {{ datapoints[idx][signals[signal].var] }}
             </td>
             <td></td>
           </tr>
@@ -85,10 +82,10 @@ export default {
     datapoints: () => state.sim.data,
     limit: () => state.sim.displayLimit
   },
-  mounted() {
+  activated() {
     state.bus.$on('resetWindow', this.reset);
   },
-  beforeDestroy() {
+  deactivated() {
     state.bus.$off('resetWindow', this.reset);
   }
 };
@@ -98,13 +95,10 @@ export default {
 .data-table thead tr th div:first-child {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .data-table thead tr th:first-child,
 .data-table thead tr th:last-child {
   width: 1%;
-}
-.data-table .units {
-  user-select: none;
 }
 </style>
