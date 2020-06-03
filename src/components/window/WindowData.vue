@@ -1,7 +1,7 @@
 <template>
   <window-base title="Datos" v-if="isActive">
     <sample-time-selector></sample-time-selector>
-    <v-simple-table fixed-header height="300px" class="data-table border">
+    <v-simple-table dense fixed-header height="300px" class="data-table border">
       <template v-slot:default>
         <thead>
           <tr>
