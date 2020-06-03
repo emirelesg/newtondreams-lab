@@ -74,14 +74,14 @@ export default {
       let v = v0;
       let t = 0;
       let signals = [];
-      while (x < 40) {
-        x += v * dt;
+      while (x <= 40) {
         signals.push({
           t: round(t, 2),
           x: round(x, 2),
           v,
           a: 0
         });
+        x += v * dt;
         t += dt;
       }
       return signals;
