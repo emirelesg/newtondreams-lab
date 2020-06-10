@@ -1,39 +1,50 @@
-import {
-  BoxGeometry,
-  MeshLambertMaterial,
-  Color,
-  Mesh,
-  Object3D,
-  AxesHelper
-} from 'three';
-
+import { Object3D, Color } from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { disposeRecursive } from '@/lib/utils';
 
 class Box extends Object3D {
   constructor() {
     super();
 
-    this.carGeometry = new BoxGeometry(7, 3, 4);
-    this.carMaterial = new MeshLambertMaterial({
-      color: new Color('rgb(0, 200, 255)')
+    this.car = null;
+    this.rail = null;
+
+    const self = this;
+    var loader = new GLTFLoader().setPath('models/main/');
+    loader.load('rails/rails.gltf', function({ scene }) {
+      scene.scale.multiplyScalar(1 / 10);
+      scene.rotation.y = Math.PI / 2;
+      scene.position.x = -50;
+      scene.traverse(function(child) {
+        if (child.isMesh) {
+          child.material.color = new Color('#bbbbbb');
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+      self.rail = scene;
+      self.add(scene);
     });
-    this.car = new Mesh(this.carGeometry, this.carMaterial);
-    this.car.position.y = 1.5;
 
-    this.geometry = new BoxGeometry(100, 0.3, 5);
-    this.material = new MeshLambertMaterial({
-      color: new Color('rgb(200, 0, 255)')
+    loader.load('car/car.gltf', function({ scene }) {
+      scene.scale.multiplyScalar(1 / 10);
+      scene.position.y = 2;
+      // scene.children[0].material.color = new Color('#ccc');
+      // scene.children[3].material.color = new Color('#cccc00');
+      scene.traverse(function(child) {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+      self.car = scene;
+      self.add(scene);
     });
-    this.mesh = new Mesh(this.geometry, this.material);
-
-    this.add(this.car);
-    this.add(this.mesh);
-    this.add(new AxesHelper(4));
-
-    this.position.y = 0.1;
   }
   destroy() {
     disposeRecursive(this);
+    this.car = null;
+    this.rail = null;
   }
 }
 

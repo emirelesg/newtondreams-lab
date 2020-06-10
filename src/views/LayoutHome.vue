@@ -2,6 +2,7 @@
   <v-app class="app">
     <app-navigation></app-navigation>
     <app-header></app-header>
+    <app-snackbar></app-snackbar>
     <v-content>
       <v-sheet tile class="full-screen">
         <app-toolbar></app-toolbar>
@@ -18,6 +19,7 @@
 <script>
 import AppToolbar from '@/components/AppToolbar';
 import AppFooter from '@/components/AppFooter';
+import AppSnackbar from '@/components/AppSnackbar';
 import AppHeader from '@/components/AppHeader';
 import AppNavigation from '@/components/AppNavigation';
 import WindowWrapper from '@/components/window/WindowWrapper';
@@ -29,6 +31,7 @@ export default {
     AppFooter,
     AppHeader,
     AppNavigation,
+    AppSnackbar,
     WindowWrapper
   },
   data: () => ({})

@@ -16,6 +16,10 @@ export const state = Vue.observable({
     start: true,
     reset: false
   },
+  snackbar: {
+    message: null,
+    color: null
+  },
   bus: new Vue()
 });
 
@@ -24,6 +28,11 @@ export const getters = {
 };
 
 export const mutations = {
+  // Set snackbar state.
+  setSnackbarMessage: (message, color) => {
+    state.snackbar.message = message;
+    state.snackbar.color = color;
+  },
   // Set auth state.
   setToken: token => {
     localStorage.setItem('device', token);

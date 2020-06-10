@@ -44,6 +44,12 @@ export default {
       legend: {
         display: false
       },
+      // animation: {
+      //   duration: 0
+      // },
+      hover: {
+        animationDuration: 0
+      },
       tooltips: {
         enabled: true,
         callbacks: {}
@@ -72,6 +78,7 @@ export default {
           borderDash: [0, 0],
           pointHitRadius: 10,
           pointHoverRadius: 4,
+          pointRadius: 0,
           data: [],
           backgroundColor: 'rgba(0, 0, 0, 0)'
         }

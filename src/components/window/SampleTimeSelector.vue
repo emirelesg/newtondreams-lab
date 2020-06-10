@@ -3,6 +3,7 @@
     @input="set"
     :value="current"
     :items="times"
+    hide-details
     label="Frecuencia de muestreo"
   ></v-select>
 </template>

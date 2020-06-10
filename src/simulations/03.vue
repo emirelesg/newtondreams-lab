@@ -51,12 +51,14 @@ export default {
     },
     reset() {
       this.i = 0;
-      this.animation = this.simulate(1 / 60);
-      mutations.setSimData(this.simulate(state.sim.sampleTime));
+      this.animation = this.simulate(1 / 60, false);
+      mutations.setSimData(this.simulate(state.sim.sampleTime, true));
     },
     draw() {
       const { t, x } = this.animation[this.i];
-      this.box.car.position.x = x;
+      if (this.box.car) {
+        this.box.car.position.x = x;
+      }
       if (state.sim.isRunning) {
         mutations.updateSimDisplayLimit(t);
         if (this.i < this.animation.length - 1) {
@@ -68,7 +70,7 @@ export default {
       this.app.controls.update();
       this.app.renderer.render(this.app.scene, this.app.camera);
     },
-    simulate(dt) {
+    simulate(dt, noise) {
       const v0 = 100;
       const x0 = -40;
       let x = x0;
@@ -76,10 +78,12 @@ export default {
       let t = 0;
       let signals = [];
       while (x <= 40) {
+        let noiseX = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
+        let noiseV = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
         signals.push({
           t: round(t, 2),
-          x: round(x, 2),
-          v,
+          x: round(x + noiseX, 2),
+          v: round(v + noiseV, 2),
           a: 0
         });
         x += v * dt;

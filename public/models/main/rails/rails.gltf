@@ -1,0 +1,115 @@
+{
+  "accessors": [
+    {
+      "name": "Body-Mesh_0_positions",
+      "componentType": 5126,
+      "count": 60,
+      "min": [
+        -40,
+        0,
+        0
+      ],
+      "max": [
+        40,
+        16,
+        1000
+      ],
+      "type": "VEC3",
+      "bufferView": 0,
+      "byteOffset": 0
+    },
+    {
+      "name": "Body-Mesh_0_indices",
+      "componentType": 5123,
+      "count": 348,
+      "min": [
+        0
+      ],
+      "max": [
+        59
+      ],
+      "type": "SCALAR",
+      "bufferView": 1,
+      "byteOffset": 0
+    }
+  ],
+  "asset": {
+    "generator": "obj2gltf",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "name": "rails",
+      "byteLength": 1416,
+      "uri": "data:application/octet-stream;base64,AAAAQgAAAAAAAAAAAAAAQgAAAAAAAHpEAAAAQgAAQEEAAHpEAAAAQgAAQEEAAAAAAAAAAAAAQEEAAAAAAAAAAAAAQEEAAHpEAAAAwgAAQEEAAAAAAAAAwgAAQEEAAHpEAAAAwgAAAAAAAHpEAAAAwgAAAAAAAAAAAAAgwgAAAAAAAAAAAAAgwgAAAAAAAHpEAAAgwgAAAEAAAHpEAAAgwgAAAEAAAAAAAAAIwgAAAEAAAHpEAAAIwgAAAEAAAAAAAAAIwgAAQEEAAAAAAAAIwgAAQEEAAHpEAAAYwgAAQEEAAAAAAAAYwgAAQEEAAHpEAAAYwgAAIEEAAHpEAAAYwgAAIEEAAAAAAAAgwgAAIEEAAHpEAAAgwgAAIEEAAAAAAAAgwgAAgEEAAHpEAAAgwgAAgEEAAAAAAAAYwgAAgEEAAHpEAAAYwgAAgEEAAAAAAAAYwgAAYEEAAHpEAAAYwgAAYEEAAAAAAADgwQAAYEEAAAAAAADgwQAAYEEAAHpEAADgwQAAgEEAAHpEAADgwQAAgEEAAAAAAAAAAAAAgEEAAAAAAAAAAAAAgEEAAHpEAADgQQAAgEEAAAAAAADgQQAAgEEAAHpEAADgQQAAYEEAAHpEAADgQQAAYEEAAAAAAAAYQgAAYEEAAAAAAAAYQgAAYEEAAHpEAAAYQgAAgEEAAHpEAAAYQgAAgEEAAAAAAAAgQgAAgEEAAHpEAAAgQgAAgEEAAAAAAAAgQgAAIEEAAHpEAAAgQgAAIEEAAAAAAAAYQgAAIEEAAHpEAAAYQgAAIEEAAAAAAAAYQgAAQEEAAHpEAAAYQgAAQEEAAAAAAAAIQgAAQEEAAAAAAAAIQgAAQEEAAHpEAAAIQgAAAEAAAAAAAAAIQgAAAEAAAHpEAAAgQgAAAEAAAHpEAAAgQgAAAEAAAAAAAAAgQgAAAAAAAHpEAAAgQgAAAAAAAAAAAAABAAIAAwAAAAIABAADAAIABAACAAUABgAEAAcABwAEAAUACAAJAAcACQAGAAcACgAJAAgACgAIAAsACgALAAwADQAKAAwADQAMAA4ADwANAA4AEAAPAA4AEAAOABEAEgAQABEAEgARABMAEgATABQAFQASABQAFQAUABYAFwAVABYAFwAWABgAGQAXABgAGQAYABoAGwAZABoAGwAaABwAHQAbABwAHgAdABwAHgAcAB8AHgAfACAAIQAeACAAIgAhACAAIgAgACMAJAAiACUAJQAiACMAJgAnACUAJwAkACUAKAAnACkAKQAnACYAKgArACkAKwAoACkALAAtACoALQArACoALgAvACwALwAtACwAMAAxAC4AMQAvAC4AMgAzADAAMwAxADAANAAzADUANQAzADIANgA0ADcANwA0ADUAOAA5ADcAOQA2ADcAOgA7ADgAOwA5ADgAAAA7AAEAAQA7ADoANgA5ADsANgA7AAAAMwAvADEAKAAtAC8AKAAvADMAKwAtACgANAAoADMAAwA0ADYAAwA2AAAAIgAkACcAIgAnAAQACgAPAAkADQAPAAoAHgAiAAQAIQAiAB4ABgAJAA8AEAAGAA8AFwASABUAHQAQABIAGQAbAB0AGQAdABIAGQASABcAAwAEACgAKAAEACcAAwAoADQABAAGAB4AHQAeABAAEAAeAAYAOAA3ADoAOgA3AAEALgAyADAALAApAC4ALgApADIALAAqACkAKQA1ADIANQACADcANwACAAEAJQAjACYAJgAjAAUADgALAAgADgAMAAsAIwAfAAUAIwAgAB8ACAAHAA4ABwARAA4AEwAWABQAEQAcABMAGgAYABwAHAAYABMAEwAYABYABQACACkABQApACYAKQACADUABwAFAB8AHwAcABEAHwARAAcA"
+    }
+  ],
+  "bufferViews": [
+    {
+      "name": "bufferView_0",
+      "buffer": 0,
+      "byteLength": 720,
+      "byteOffset": 0,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "name": "bufferView_1",
+      "buffer": 0,
+      "byteLength": 696,
+      "byteOffset": 720,
+      "target": 34963
+    }
+  ],
+  "materials": [
+    {
+      "name": "color_cccccc",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Body-Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0
+          },
+          "indices": 1,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Body",
+      "mesh": 0
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
