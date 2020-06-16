@@ -63,7 +63,8 @@ class App {
     this.setCallbacks();
   }
   initScene() {
-    this.scene.background = new THREE.Color('#444');
+    // this.scene.background = new THREE.Color('#444');
+    this.scene.background = new THREE.Color('#F5F7FA');
 
     // Fog mixes the floor with the background.
     this.scene.fog = new THREE.Fog(this.scene.background, 250, 400);
@@ -71,7 +72,7 @@ class App {
     // Lights up the scene globally.
     const hemiLight = new THREE.HemisphereLight(
       new THREE.Color('#ffffff'),
-      new THREE.Color('#080820'),
+      new THREE.Color('#242424'),
       0.75
     );
     hemiLight.position.set(0, 50, 0);
@@ -79,7 +80,7 @@ class App {
     // Spotlight lights up the scene from the from.
     const spotLight = new THREE.SpotLight(new THREE.Color('#ffffff'), 0.5);
     spotLight.castShadow = true;
-    spotLight.shadow.bias = -0.000001;
+    spotLight.shadow.bias = -0.0000001;
     spotLight.shadow.mapSize.width = 1024 * 4;
     spotLight.shadow.mapSize.height = 1024 * 4;
     spotLight.position.set(0, 150, this.controls.maxDistance);

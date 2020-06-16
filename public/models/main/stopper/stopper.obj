@@ -1,6 +1,6 @@
 # FreeCAD v0.18.4 build Arch module
 # http://www.freecadweb.org
-mtllib rails.mtl
+mtllib stopper.mtl
 o Body
 usemtl color_2a2a2a
 v -35.5 0.0 -2.5

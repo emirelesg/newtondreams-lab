@@ -72,12 +72,12 @@ export default {
     },
     simulate(dt, noise) {
       const v0 = 100;
-      const x0 = -40;
+      const x0 = -39;
       let x = x0;
       let v = v0;
       let t = 0;
       let signals = [];
-      while (x <= 40) {
+      while (x <= 45) {
         let noiseX = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
         let noiseV = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
         signals.push({
