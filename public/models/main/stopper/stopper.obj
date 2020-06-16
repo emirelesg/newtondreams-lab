@@ -2,7 +2,7 @@
 # http://www.freecadweb.org
 mtllib stopper.mtl
 o Body
-usemtl color_2a2a2a
+usemtl color_757575
 v -35.5 0.0 -2.5
 v -30.5 0.0 -2.5
 v -30.5 0.0 2.5
@@ -87,8 +87,8 @@ f 28 13 22
 f 28 14 13
 f 23 24 18
 f 23 18 21
-f 24 19 18
-f 24 26 19
+f 18 26 19
+f 24 26 18
 f 19 26 29
 f 30 19 29
 f 31 26 25

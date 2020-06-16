@@ -2,7 +2,7 @@
 # http://www.freecadweb.org
 mtllib sensor.mtl
 o b_sensor_body_001_
-usemtl color_c5aecc
+usemtl color_a791cc
 v 0.0 14.232465 -12.876662
 v 0.0 14.232465 9.294288
 v 0.0 14.916352 -11.073401

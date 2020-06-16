@@ -67,17 +67,17 @@ export default {
           mutations.stopSim();
         }
       }
-      this.app.controls.update();
+      this.app.controls.update(this.app.camera);
       this.app.renderer.render(this.app.scene, this.app.camera);
     },
     simulate(dt, noise) {
       const v0 = 100;
-      const x0 = -39;
+      const x0 = -35;
       let x = x0;
       let v = v0;
       let t = 0;
       let signals = [];
-      while (x <= 45) {
+      while (x <= 49) {
         let noiseX = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
         let noiseV = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
         signals.push({

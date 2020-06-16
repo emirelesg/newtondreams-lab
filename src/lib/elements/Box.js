@@ -2,12 +2,6 @@ import { Object3D, Color } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { disposeRecursive } from '@/lib/utils';
 
-// const modelDefs = {
-//   car: {
-//     path: 'car/car.gltf'
-//   }
-// };
-
 class Box extends Object3D {
   constructor() {
     super();
@@ -40,18 +34,19 @@ class Box extends Object3D {
   }
   loadCar(model) {
     this.car = this.preprocess(model);
-    this.car.children[0].material.color = new Color('#ccccff');
+    this.car.children[0].material.color = new Color('#aaff00');
     this.add(this.car);
   }
   loadSensor(model) {
     this.sensor = this.preprocess(model);
-    this.sensor.position.x = 48;
+    this.sensor.rotation.y = Math.PI;
+    this.sensor.position.x = -48;
     this.add(this.sensor);
   }
   loadStopper(model) {
     this.stopper = this.preprocess(model);
     this.stopper.rotation.y = Math.PI / 2;
-    this.stopper.position.x = -50 + 0.5;
+    this.stopper.position.x = 50 - 0.5;
     this.add(this.stopper);
   }
   destroy() {

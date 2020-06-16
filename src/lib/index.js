@@ -43,6 +43,8 @@ class App {
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.07;
 
+    this.controls.screenSpacePanning = false;
+
     // Limit the rotation of the horizontal (-x) axis to 90 deg.
     this.controls.maxPolarAngle = Math.PI / 2;
 
