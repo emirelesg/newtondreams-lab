@@ -63,12 +63,12 @@
   ],
   "materials": [
     {
-      "name": "color_757575",
+      "name": "color_7a7a7a",
       "pbrMetallicRoughness": {
         "baseColorFactor": [
-          0.4588235318660736,
-          0.4588235318660736,
-          0.4588235318660736,
+          0.47843137383461,
+          0.47843137383461,
+          0.47843137383461,
           1
         ],
         "metallicFactor": 0,

@@ -5,7 +5,7 @@
 <script>
 import { state, mutations } from '@/store/index';
 import App from '@/lib/index';
-import Box from '@/lib/elements/Box';
+import Rail from '@/lib/elements/RailSystem';
 import { round } from '@/lib/utils';
 
 const signals = [
@@ -33,7 +33,7 @@ const signals = [
 ];
 
 export default {
-  name: 'Sim3',
+  name: 'PlanoInclinado',
   components: {},
   data: () => ({
     app: null,
@@ -45,8 +45,8 @@ export default {
   methods: {
     setup() {
       this.app = new App(this.$refs.parent, {});
-      this.box = new Box();
-      this.app.scene.add(this.box);
+      this.model = new Rail();
+      this.app.scene.add(this.model);
       this.app.renderer.setAnimationLoop(this.draw.bind(this));
     },
     reset() {
@@ -56,8 +56,8 @@ export default {
     },
     draw() {
       const { t, x } = this.animation[this.i];
-      if (this.box.car) {
-        this.box.car.position.x = x;
+      if (this.model.car) {
+        this.model.car.position.x = -37 + x;
       }
       if (state.sim.isRunning) {
         mutations.updateSimDisplayLimit(t);
@@ -72,12 +72,12 @@ export default {
     },
     simulate(dt, noise) {
       const v0 = 100;
-      const x0 = -35;
+      const x0 = 2;
       let x = x0;
       let v = v0;
       let t = 0;
       let signals = [];
-      while (x <= 49) {
+      while (x <= 85) {
         let noiseX = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
         let noiseV = noise ? 0.1 * (Math.random() * 6 - 3) : 0;
         signals.push({
@@ -101,9 +101,9 @@ export default {
     state.bus.$on('reset', this.reset);
   },
   beforeDestroy() {
-    this.box.destroy();
-    this.box = null;
+    this.model.destroy();
     this.app.destroy();
+    this.model = null;
     this.app = null;
     state.bus.$off('reset', this.reset);
   }

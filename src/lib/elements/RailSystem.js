@@ -2,7 +2,7 @@ import { Object3D, Color } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { disposeRecursive } from '@/lib/utils';
 
-class Box extends Object3D {
+export default class RailSystem extends Object3D {
   constructor() {
     super();
     this.models = [];
@@ -34,7 +34,7 @@ class Box extends Object3D {
   }
   loadCar(model) {
     this.car = this.preprocess(model);
-    this.car.children[0].material.color = new Color('#aaff00');
+    this.car.children[4].material.color = new Color('#aadd00');
     this.add(this.car);
   }
   loadSensor(model) {
@@ -57,5 +57,3 @@ class Box extends Object3D {
     this.stopper = null;
   }
 }
-
-export default Box;

@@ -9,7 +9,7 @@ import App from '@/lib/index';
 const signals = [];
 
 export default {
-  name: 'Sim3',
+  name: 'Mediciones',
   components: {},
   data: () => ({
     app: null
