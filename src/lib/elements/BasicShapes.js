@@ -76,6 +76,7 @@ export default class BasicShapes extends Object3D {
       new SphereBufferGeometry(0.5, 10, 10),
       new MeshBasicMaterial({ color: colors.red.accent3 })
     );
+    this.movingPoint.visible = false;
     this.startPoint.visible = false;
     this.endPoint.visible = false;
 
