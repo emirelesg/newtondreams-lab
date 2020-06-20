@@ -1,6 +1,7 @@
 <template>
   <div class="window-switcher">
     <v-btn
+      :disabled="!enabled[window.key]"
       text
       v-for="(window, i) in windows"
       :key="window.name"
@@ -22,20 +23,19 @@ export default {
     windows: [
       {
         name: 'Datos',
+        key: 'data',
         icon: 'mdi-table-large'
       },
       {
         name: 'Gráficas',
+        key: 'graph',
         icon: 'mdi-chart-line'
+      },
+      {
+        name: 'Ajustes',
+        key: 'settings',
+        icon: 'mdi-cog'
       }
-      // {
-      //   name: 'Análisis',
-      //   icon: 'mdi-calculator'
-      // },
-      // {
-      //   name: 'Ajustes',
-      //   icon: 'mdi-cog'
-      // }
     ]
   }),
   methods: {
@@ -44,7 +44,8 @@ export default {
     }
   },
   computed: {
-    active: () => state.activeWindow
+    active: () => state.activeWindow,
+    enabled: () => state.windows
   }
 };
 </script>

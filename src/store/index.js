@@ -10,11 +10,17 @@ export const state = Vue.observable({
     signals: [],
     data: [],
     displayLimit: 0,
-    isRunning: false
+    isRunning: false,
+    controls: {}
   },
   controls: {
-    start: true,
+    start: false,
     reset: false
+  },
+  windows: {
+    data: false,
+    graph: false,
+    settings: false
   },
   snackbar: {
     message: null,
@@ -55,9 +61,22 @@ export const mutations = {
   setActiveWindow: win => {
     state.activeWindow = win;
   },
+  setEnabledControls: controls => {
+    Object.keys(state.controls).forEach(c => {
+      state.controls[c] = controls.indexOf(c) !== -1;
+    });
+  },
+  setEnabledWindows: windows => {
+    Object.keys(state.windows).forEach(w => {
+      state.windows[w] = windows.indexOf(w) !== -1;
+    });
+  },
   // Following mutations have to do with the simulation.
   setSimSignals: signals => {
     state.sim.signals = signals || [];
+  },
+  setSimControls: controls => {
+    state.sim.controls = controls || {};
   },
   setSimSampleTime: dt => {
     state.sim.sampleTime = dt;
@@ -113,6 +132,12 @@ export const actions = {
     mutations.updateSimDisplayLimit(0);
     mutations.setSimData(null);
     mutations.setSimSignals(null);
+    mutations.setSimControls(null);
+    mutations.stopSim();
+
+    // Clear enabled controls and windows.
+    mutations.setEnabledControls([]);
+    mutations.setEnabledWindows([]);
 
     // Since all windows use 'keep-alive' signal them to
     // reset their respective properties.

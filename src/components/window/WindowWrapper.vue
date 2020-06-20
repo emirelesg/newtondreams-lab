@@ -10,15 +10,18 @@
 import { state } from '@/store/index';
 import WindowData from '@/components/window/WindowData.vue';
 import WindowChart from '@/components/window/WindowChart.vue';
+import WindowSettings from '@/components/window/WindowSettings.vue';
 
 export default {
   name: 'WindowWrapper',
   components: {
     WindowData,
-    WindowChart
+    WindowChart,
+    WindowSettings
   },
   data: () => ({
-    windowComponent: null
+    windowComponent: null,
+    windows: [WindowData, WindowChart, WindowSettings]
   }),
   watch: {
     activeWindow() {
@@ -30,10 +33,8 @@ export default {
   },
   methods: {
     init() {
-      if (this.activeWindow === 0) {
-        this.windowComponent = WindowData;
-      } else if (this.activeWindow === 1) {
-        this.windowComponent = WindowChart;
+      if (this.windows[this.activeWindow]) {
+        this.windowComponent = this.windows[this.activeWindow];
       } else {
         this.windowComponent = null;
       }
