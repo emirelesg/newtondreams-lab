@@ -67,4 +67,14 @@ export default {
 .toolbar-container >>> button .v-btn__content i {
   margin-right: 15px;
 }
+
+@media only screen and (max-width: 600px) {
+  .toolbar-container >>> button .v-btn__content i {
+    margin-right: 0px;
+  }
+
+  .toolbar-container >>> button .v-btn__content span {
+    display: none;
+  }
+}
 </style>
