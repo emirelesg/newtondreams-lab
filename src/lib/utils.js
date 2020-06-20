@@ -21,3 +21,20 @@ export function round(val, places) {
   const k = Math.pow(10, places);
   return Math.round(val * k) / k;
 }
+
+export function gaussianRandom(min, max) {
+  // https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
+  let u = 0;
+  let v = 0;
+  while (u === 0) u = Math.random();
+  while (v === 0) v = Math.random();
+  let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  num = num / 10.0 + 0.5;
+  if (num > 1 || num < 0) num = gaussianRandom(min, max);
+  return num * (max - min) + min;
+}
+
+export function guassianNoiseIf(condition, n) {
+  if (condition) return gaussianRandom(-n, n);
+  return 0;
+}

@@ -43,14 +43,15 @@ class App {
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.07;
 
+    this.controls.enablePan = false;
     this.controls.screenSpacePanning = false;
 
     // Limit the rotation of the horizontal (-x) axis to 90 deg.
     this.controls.maxPolarAngle = Math.PI / 2;
 
     // // Limit the rotation on the vertical (-y) axis to 180 deg.
-    this.controls.maxAzimuthAngle = Math.PI / 2;
-    this.controls.minAzimuthAngle = -Math.PI / 2;
+    // this.controls.maxAzimuthAngle = Math.PI / 2;
+    // this.controls.minAzimuthAngle = -Math.PI / 2;
 
     // // Limit the amount fo zoom.
     this.controls.minDistance = 100;
@@ -69,7 +70,7 @@ class App {
     this.scene.background = new THREE.Color('#F5F7FA');
 
     // Fog mixes the floor with the background.
-    // this.scene.fog = new THREE.Fog(this.scene.background, 250, 400);
+    this.scene.fog = new THREE.Fog(this.scene.background, 250, 400);
 
     // Lights up the scene globally.
     const hemiLight = new THREE.HemisphereLight(
@@ -90,13 +91,14 @@ class App {
     spotLight.position.set(0, 150, this.controls.maxDistance);
 
     // The floor receives shadows. Gives sense of depth.
-    // const floor = new THREE.Mesh(
-    //   new THREE.PlaneBufferGeometry(500, 500),
-    //   new THREE.MeshPhongMaterial({ color: this.scene.background })
-    // );
-    // floor.rotation.x = -Math.PI / 2;
-    // floor.position.y = -4;
-    // floor.receiveShadow = true;
+    const floor = new THREE.Mesh(
+      new THREE.PlaneBufferGeometry(500, 500),
+      new THREE.MeshPhongMaterial({ color: this.scene.background })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -4;
+    floor.receiveShadow = true;
+    this.scene.add(floor);
 
     this.scene.add(spotLight, hemiLight);
   }

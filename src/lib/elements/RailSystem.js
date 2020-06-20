@@ -18,7 +18,7 @@ export default class RailSystem extends Object3D {
   }
   preprocess({ scene }) {
     scene.scale.multiplyScalar(1 / 10);
-    scene.traverse(function(child) {
+    scene.traverse(function (child) {
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
@@ -48,6 +48,11 @@ export default class RailSystem extends Object3D {
     this.stopper.rotation.y = Math.PI / 2;
     this.stopper.position.x = 50 - 0.5;
     this.add(this.stopper);
+  }
+  setInclination(angle) {
+    this.rotation.z = (angle * Math.PI) / 180;
+    this.position.y = 50 * Math.sin(-this.rotation.z);
+    this.position.x = 50 - 50 * Math.cos(-this.rotation.z);
   }
   destroy() {
     disposeRecursive(this);
