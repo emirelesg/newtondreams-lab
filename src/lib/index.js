@@ -2,14 +2,20 @@ import {
   PerspectiveCamera,
   Scene,
   WebGLRenderer,
-  // Color,
+  Color,
+  Fog,
   Vector2,
+  HemisphereLight,
+  SpotLight,
+  PlaneBufferGeometry,
+  MeshPhongMaterial,
+  Mesh,
+  PCFSoftShadowMap,
   // AmbientLight,
   Vector3
   // PointLight,
   // GridHelper
 } from 'three';
-import * as THREE from 'three';
 import { state, mutations } from '@/store/index';
 import { disposeRecursive } from '@/lib/utils';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -30,7 +36,7 @@ class App {
       this.renderer = new WebGLRenderer({
         antialias: true
       });
-      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      this.renderer.shadowMap.type = PCFSoftShadowMap;
       this.renderer.shadowMap.enabled = true;
       mutations.setRenderer(this.renderer);
     }
@@ -61,21 +67,23 @@ class App {
     this.controls.target = new Vector3(0, 0, 0);
     this.controls.update();
 
+    // this.scene.translateY(-10);
+
     // Init scene.
     this.initScene();
     this.setCallbacks();
   }
   initScene() {
     // this.scene.background = new THREE.Color('#444');
-    this.scene.background = new THREE.Color('#F5F7FA');
+    this.scene.background = new Color('#F5F7FA');
 
     // Fog mixes the floor with the background.
-    this.scene.fog = new THREE.Fog(this.scene.background, 250, 400);
+    this.scene.fog = new Fog(this.scene.background, 250, 400);
 
     // Lights up the scene globally.
-    const hemiLight = new THREE.HemisphereLight(
-      new THREE.Color('#ffffff'),
-      new THREE.Color('#242424'),
+    const hemiLight = new HemisphereLight(
+      new Color('#ffffff'),
+      new Color('#242424'),
       0.75
     );
     hemiLight.position.set(0, 50, 0);
@@ -83,7 +91,7 @@ class App {
     // const ambientLight = new THREE.AmbientLight(new THREE.Color('#ffffff'), 0);
 
     // Spotlight lights up the scene from the from.
-    const spotLight = new THREE.SpotLight(new THREE.Color('#ffffff'), 0.5);
+    const spotLight = new SpotLight(new Color('#ffffff'), 0.5);
     spotLight.castShadow = true;
     spotLight.shadow.bias = -0.0000001;
     spotLight.shadow.mapSize.width = 1024 * 4;
@@ -91,9 +99,9 @@ class App {
     spotLight.position.set(0, 150, this.controls.maxDistance);
 
     // The floor receives shadows. Gives sense of depth.
-    const floor = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry(500, 500),
-      new THREE.MeshPhongMaterial({ color: this.scene.background })
+    const floor = new Mesh(
+      new PlaneBufferGeometry(500, 500),
+      new MeshPhongMaterial({ color: this.scene.background })
     );
     floor.rotation.x = -Math.PI / 2;
     floor.position.y = -4;
