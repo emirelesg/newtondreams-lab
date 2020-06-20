@@ -67,8 +67,6 @@ class App {
     this.controls.target = new Vector3(0, 0, 0);
     this.controls.update();
 
-    // this.scene.translateY(-10);
-
     // Init scene.
     this.initScene();
     this.setCallbacks();
