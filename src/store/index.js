@@ -11,7 +11,7 @@ export const state = Vue.observable({
     data: [],
     displayLimit: 0,
     isRunning: false,
-    controls: {}
+    settings: {}
   },
   controls: {
     start: false,
@@ -75,8 +75,8 @@ export const mutations = {
   setSimSignals: signals => {
     state.sim.signals = signals || [];
   },
-  setSimControls: controls => {
-    state.sim.controls = controls || {};
+  setSimSettings: settings => {
+    state.sim.settings = settings || {};
   },
   setSimSampleTime: dt => {
     state.sim.sampleTime = dt;
@@ -132,7 +132,7 @@ export const actions = {
     mutations.updateSimDisplayLimit(0);
     mutations.setSimData(null);
     mutations.setSimSignals(null);
-    mutations.setSimControls(null);
+    mutations.setSimSettings(null);
     mutations.stopSim();
 
     // Clear enabled controls and windows.

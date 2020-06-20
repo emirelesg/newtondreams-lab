@@ -13,34 +13,25 @@
 
 <script>
 import SimHeader from '@/components/SimHeader.vue';
-import { state, mutations } from '@/store/index';
+import SimMixin from '@/components/SimMixin.js';
 import BasicShapes from '@/lib/elements/BasicShapes';
 import { round, gaussianRandom } from '@/lib/utils';
-import App from '@/lib/index';
 
 export default {
   name: 'Mediciones',
+  mixins: [SimMixin],
   components: {
     SimHeader
   },
   data: () => ({
-    app: null,
     model: null
   }),
-  watch: {},
   methods: {
     setup() {
-      this.app = new App(this.$refs.parent, {});
+      if (this.model) this.model.destroy();
       this.model = new BasicShapes(this.app);
       this.app.scene.add(this.model);
-      this.app.renderer.setAnimationLoop(this.draw.bind(this));
     },
-    reset() {},
-    draw() {
-      this.app.controls.update();
-      this.app.renderer.render(this.app.scene, this.app.camera);
-    },
-    simulate() {},
     getDistance() {
       if (this.model && this.model.distance) {
         return `${round(
@@ -52,20 +43,12 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      mutations.setEnabledControls([]);
-      mutations.setEnabledWindows(['data']);
-      this.setup();
-      mutations.resetSim();
-    });
-    state.bus.$on('reset', this.reset);
+    this.init([], [], {}, {});
   },
   beforeDestroy() {
-    this.model.destroy();
-    this.app.destroy();
-    this.app = null;
+    if (this.model) this.model.destroy();
     this.model = null;
-    state.bus.$off('reset', this.reset);
+    this.destroy();
   }
 };
 </script>

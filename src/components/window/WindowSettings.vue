@@ -1,11 +1,11 @@
 <template>
   <window-base title="Ajustes">
     <v-row dense>
-      <v-col cols="12" v-for="key in controlKeys" :key="key">
+      <v-col cols="12" v-for="key in settingKeys" :key="key">
         <setting-slider
-          :conf="controls[key]"
+          :conf="settings[key]"
           @input="val => set(key, val)"
-          v-if="controls[key].type === 'slider'"
+          v-if="settings[key].type === 'slider'"
         ></setting-slider>
       </v-col>
     </v-row>
@@ -16,6 +16,7 @@
 import { state, mutations } from '@/store/index';
 import SettingSlider from '@/components/window/SettingSlider.vue';
 import WindowBase from '@/components/window/WindowBase.vue';
+
 export default {
   name: 'WindowSettings',
   components: {
@@ -29,7 +30,7 @@ export default {
   watch: {},
   methods: {
     set(key, val) {
-      this.controls[key].value = val;
+      this.settings[key].value = val;
       this.resetDebounced();
     },
     resetDebounced() {
@@ -42,8 +43,8 @@ export default {
   activated() {},
   deactivated() {},
   computed: {
-    controls: () => state.sim.controls,
-    controlKeys: () => Object.keys(state.sim.controls)
+    settings: () => state.sim.settings,
+    settingKeys: () => Object.keys(state.sim.settings)
   }
 };
 </script>
