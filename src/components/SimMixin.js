@@ -10,7 +10,6 @@ export default {
     init(enabledControls, enabledWindows, signals, settings) {
       this.$nextTick(() => {
         this.setAnimationData([]);
-        mutations.setEnabledControls(enabledControls);
         mutations.setEnabledWindows(enabledWindows);
         mutations.setSimSignals(signals);
         mutations.setSimSettings(settings);
@@ -18,6 +17,7 @@ export default {
         this._setup();
         this.setup();
         mutations.resetSim();
+        mutations.setEnabledControls(enabledControls);
       });
     },
     setSimulationData(data) {
