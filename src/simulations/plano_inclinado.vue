@@ -3,7 +3,11 @@
     <sim-header
       title="Plano Inclinado"
       description="Analiza el movimiento en un vehiculo en un plano inclinado."
-    ></sim-header>
+    >
+      <div class="warning--text font-weight-bold" v-if="animation.length === 1">
+        La fricción (&mu;<sub>s</sub>) impide el movimiento del vehículo.
+      </div>
+    </sim-header>
   </div>
 </template>
 
@@ -14,29 +18,25 @@ import { state } from '@/store/index';
 import { round, guassianNoiseIf } from '@/lib/utils';
 import RailSystem from '@/lib/elements/RailSystem';
 
-const signals = [
-  {
+const signals = {
+  t: {
     name: 'Tiempo',
-    var: 't',
     units: 's',
     isTime: true
   },
-  {
+  x: {
     name: 'Posición',
-    var: 'x',
     units: 'm'
   },
-  {
+  v: {
     name: 'Velocidad',
-    var: 'v',
     units: 'm/s'
   },
-  {
+  a: {
     name: 'Aceleración',
-    var: 'a',
     units: 'm/s^2'
   }
-];
+};
 
 const controls = {
   angle: {
@@ -81,24 +81,25 @@ export default {
       const sinx = Math.sin(theta);
       const cosx = Math.cos(theta);
       const g = 9.81;
-      const uk = 0.1;
+      const uk = 0.07;
+      const us = 0.09;
       let x = 0.02;
+      const aStatic = g * (sinx - us * cosx);
       const a = g * (sinx - uk * cosx);
       let v = 0;
       let t = 0;
       let signals = [];
-      while (x <= 0.85) {
+      do {
         signals.push({
           t: round(t, 2),
           x: round(x + guassianNoiseIf(noise, 0.003), 4),
           v: round(v + guassianNoiseIf(noise, 0.003), 4),
           a: round(a + guassianNoiseIf(noise, 0.003), 4)
         });
-        if (a <= 0) break;
         v += a * dt;
         x += v * dt;
         t += dt;
-      }
+      } while (x <= 0.85 && aStatic >= 0);
       return signals;
     }
   },

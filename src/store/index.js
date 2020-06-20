@@ -7,10 +7,10 @@ export const state = Vue.observable({
   activeWindow: null,
   sim: {
     sampleTime: null,
-    signals: [],
     data: [],
     displayLimit: 0,
     isRunning: false,
+    signals: {},
     settings: {}
   },
   controls: {
@@ -73,10 +73,10 @@ export const mutations = {
   },
   // Following mutations have to do with the simulation.
   setSimSignals: signals => {
-    state.sim.signals = signals || [];
+    state.sim.signals = JSON.parse(JSON.stringify(signals || {}));
   },
   setSimSettings: settings => {
-    state.sim.settings = settings || {};
+    state.sim.settings = JSON.parse(JSON.stringify(settings || {}));
   },
   setSimSampleTime: dt => {
     state.sim.sampleTime = dt;

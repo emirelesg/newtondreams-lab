@@ -34,8 +34,8 @@
 export default {
   name: 'SignalSelector',
   props: {
-    signals: { type: Array, required: true },
-    value: { type: Number, default: null }
+    signals: { type: Object, required: true },
+    value: { type: String, default: null }
   },
   data: () => ({}),
   watch: {
@@ -51,9 +51,10 @@ export default {
       // All signal selectors start with the value of null. Once signals are loaded,
       // and current value is null, the first element is selected.
       // If no signals are found, then the value is set to null.
-      if (this.signals.length > 0) {
+      const keys = Object.keys(this.signals);
+      if (keys.length > 0) {
         if (this.value === null) {
-          this.$emit('input', 0);
+          this.$emit('input', keys[0]);
         }
       } else {
         this.$emit('input', null);

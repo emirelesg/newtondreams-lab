@@ -38,3 +38,11 @@ export function guassianNoiseIf(condition, n) {
   if (condition) return gaussianRandom(-n, n);
   return 0;
 }
+
+export function filterObj(obj, test) {
+  if (!obj || typeof obj !== 'object') return {};
+  return Object.entries(obj).reduce((acc, [key, obj]) => {
+    if (test(obj)) return { ...acc, [key]: obj };
+    return acc;
+  }, {});
+}

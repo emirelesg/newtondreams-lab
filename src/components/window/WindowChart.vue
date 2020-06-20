@@ -22,6 +22,7 @@
 
 <script>
 import { state } from '@/store/index';
+import { filterObj } from '@/lib/utils';
 import Chart from '@/components/charts/BaseChart';
 import WindowBase from '@/components/window/WindowBase';
 import SignalSelector from '@/components/window/SignalSelector';
@@ -123,20 +124,20 @@ export default {
       this.$refs.chart.color(0, this.$vuetify.theme.themes.light.primary);
 
       // Get x values from datapoints.
-      if (this.timeSignals[this.varX]) {
-        const x = this.timeSignals[this.varX];
-        this.xValues = this.datapoints.map(point => point[x.var]);
-        this.$refs.chart.xUnits(x.units);
+      if (this.varX) {
+        const { units } = this.timeSignals[this.varX];
+        this.xValues = this.datapoints.map(point => point[this.varX]);
+        this.$refs.chart.xUnits(units);
       } else {
         this.xValues = [];
       }
       this.data.labels = this.xValues;
 
       // Get y values from datapoints and set -y limits.
-      if (this.otherSignals[this.varY]) {
-        const y = this.otherSignals[this.varY];
-        this.yValues = this.datapoints.map(point => point[y.var]);
-        this.$refs.chart.yUnits(y.units);
+      if (this.varY) {
+        const { units } = this.otherSignals[this.varY];
+        this.yValues = this.datapoints.map(point => point[this.varY]);
+        this.$refs.chart.yUnits(units);
         this.$refs.chart.ylim(
           Math.min(...this.yValues),
           Math.max(...this.yValues)
@@ -162,8 +163,8 @@ export default {
     this.isActive = false;
   },
   computed: {
-    timeSignals: () => state.sim.signals.filter(s => s.isTime),
-    otherSignals: () => state.sim.signals.filter(s => !s.isTime),
+    timeSignals: () => filterObj(state.sim.signals, obj => obj.isTime),
+    otherSignals: () => filterObj(state.sim.signals, obj => !obj.isTime),
     datapoints: () => state.sim.data,
     limit: () => state.sim.displayLimit
   }

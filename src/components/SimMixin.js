@@ -4,7 +4,7 @@ export default {
   data: () => ({
     app: null,
     _step: 0,
-    _animation: []
+    animation: []
   }),
   methods: {
     init(enabledControls, enabledWindows, signals, settings) {
@@ -25,7 +25,7 @@ export default {
     },
     setAnimationData(animation) {
       this._step = 0;
-      this._animation = animation;
+      this.animation = animation;
     },
     destroy() {
       state.bus.$off('reset', this._reset);
@@ -42,15 +42,15 @@ export default {
     },
     _draw() {
       if (this.draw) {
-        if (this._animation.length > 0) {
-          this.draw(this._animation[this._step]);
+        if (this.animation.length > 0) {
+          this.draw(this.animation[this._step]);
         } else {
           this.draw();
         }
       }
       if (state.sim.isRunning) {
-        mutations.updateSimDisplayLimit(this._animation[this._step].t);
-        if (this._step < this._animation.length - 1) {
+        mutations.updateSimDisplayLimit(this.animation[this._step].t);
+        if (this._step < this.animation.length - 1) {
           this._step += 1;
         } else {
           mutations.stopSim();

@@ -55,9 +55,7 @@
                   v-for="(signal, idy) in selectedSignals"
                   :key="`row-${idx}-col-${idy}`"
                 >
-                  {{
-                    signals[signal] ? datapoints[idx][signals[signal].var] : ''
-                  }}
+                  {{ signals[signal] ? datapoints[idx][signal] : 0 }}
                 </td>
                 <td></td>
               </tr>
@@ -90,7 +88,7 @@ export default {
   }),
   methods: {
     addSignal() {
-      this.selectedSignals.push(this.signals.length > 0 ? 0 : null);
+      this.selectedSignals.push(null);
     },
     removeSignal(idx) {
       this.selectedSignals.splice(idx, 1);
