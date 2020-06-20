@@ -53,11 +53,10 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      // mutations.resetSim();
       mutations.setEnabledControls([]);
       mutations.setEnabledWindows(['data']);
       this.setup();
-      this.reset();
+      mutations.resetSim();
     });
     state.bus.$on('reset', this.reset);
   },
