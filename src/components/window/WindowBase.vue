@@ -1,5 +1,5 @@
 <template>
-  <v-card flat class="border">
+  <v-card flat class="border window-card">
     <v-card-title class="">
       <span class="font-weight-regular">{{ title }}</span>
       <v-spacer></v-spacer>
@@ -29,3 +29,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.window-card {
+  height: 100%;
+  overflow-y: scroll;
+}
+</style>

@@ -13,7 +13,7 @@
         <v-simple-table
           dense
           fixed-header
-          height="300px"
+          height="250px"
           class="data-table border"
           id="myDataTable"
         >
