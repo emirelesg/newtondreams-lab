@@ -16,15 +16,20 @@
         </v-list-item>
       </v-list-item-group>
     </v-list>
+    <app-footer></app-footer>
   </v-navigation-drawer>
 </template>
 
 <script>
+import AppFooter from '@/components/AppFooter.vue';
 import { mutations, state } from '@/store/index';
 import { labs } from '@/router';
 
 export default {
   name: 'AppNavigation',
+  components: {
+    AppFooter
+  },
   data: () => ({
     labs
   }),

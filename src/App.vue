@@ -30,7 +30,9 @@ canvas {
 }
 
 .background {
-  background-color: #f5f7fa !important;
+  /* background-color: #f5f7fa !important; */
+  /* background-color: #f5f5f5 !important; */
+  background-color: #ffffff !important;
 }
 
 .border-bottom {

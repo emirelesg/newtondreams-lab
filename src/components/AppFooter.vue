@@ -1,13 +1,16 @@
 <template>
   <v-footer
-    app
+    absolute
     class="secondary--text footer caption border-top background"
     elevation="0"
   >
-    <span>
-      Universidad de Monterrey &copy; 2014 -
+    <div>
+      Universidad de Monterrey
+    </div>
+    <div>
+      &copy; 2014 -
       {{ new Date().getFullYear() }}
-    </span>
+    </div>
   </v-footer>
 </template>
 
@@ -21,5 +24,6 @@ export default {
 <style scoped>
 .footer {
   bottom: -1px !important;
+  left: -1px !important;
 }
 </style>
