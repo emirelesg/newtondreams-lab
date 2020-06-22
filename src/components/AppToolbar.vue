@@ -68,7 +68,7 @@ export default {
   margin-right: 15px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 675px) {
   .toolbar-container >>> button .v-btn__content i {
     margin-right: 0px;
   }

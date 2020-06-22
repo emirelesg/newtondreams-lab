@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .desc {
   position: absolute;
-  padding: 32px 16px;
+  padding: 16px;
   text-align: center;
   width: 100%;
   user-select: none;

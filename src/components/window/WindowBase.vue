@@ -29,10 +29,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.window-card {
-  height: 100%;
-  overflow-y: scroll;
-}
-</style>

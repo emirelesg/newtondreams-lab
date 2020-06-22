@@ -12,13 +12,11 @@
         </div>
       </v-sheet>
     </v-content>
-    <!-- <app-footer></app-footer> -->
   </v-app>
 </template>
 
 <script>
 import AppToolbar from '@/components/AppToolbar';
-// import AppFooter from '@/components/AppFooter';
 import AppSnackbar from '@/components/AppSnackbar';
 import AppHeader from '@/components/AppHeader';
 import AppNavigation from '@/components/AppNavigation';
@@ -28,7 +26,6 @@ export default {
   name: 'LayoutMain',
   components: {
     AppToolbar,
-    // AppFooter,
     AppHeader,
     AppNavigation,
     AppSnackbar,

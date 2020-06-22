@@ -1,13 +1,24 @@
 <template>
-  <div id="window" ref="window">
-    <keep-alive>
-      <component :is="windowComponent"></component>
-    </keep-alive>
+  <div id="window">
+    <v-dialog
+      :value="!!windowComponent"
+      attach="#window"
+      no-click-animation
+      persistent
+      scrollable
+      :retain-focus="false"
+      hide-overlay
+      @input="close"
+    >
+      <keep-alive>
+        <component :is="windowComponent"></component>
+      </keep-alive>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import { state } from '@/store/index';
+import { state, mutations } from '@/store/index';
 import WindowData from '@/components/window/WindowData.vue';
 import WindowChart from '@/components/window/WindowChart.vue';
 import WindowSettings from '@/components/window/WindowSettings.vue';
@@ -35,11 +46,12 @@ export default {
     init() {
       if (this.windows[this.activeWindow]) {
         this.windowComponent = this.windows[this.activeWindow];
-        this.$refs.window.classList.add('active');
       } else {
-        this.$refs.window.classList.remove('active');
         this.windowComponent = null;
       }
+    },
+    close() {
+      mutations.setActiveWindow(null);
     }
   },
   computed: {
@@ -49,27 +61,14 @@ export default {
 </script>
 
 <style scoped>
-#window {
+#window .v-dialog__content {
   position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  opacity: 1;
-  padding: 16px;
-  width: 50%;
-  height: 50%;
-  height: 100%;
-  display: none;
-}
-
-#window.active {
-  display: block;
+  width: 600px;
 }
 
 @media only screen and (max-width: 600px) {
-  #window.active {
+  #window .v-dialog__content {
     width: 100%;
-    height: 100%;
   }
 }
 </style>
