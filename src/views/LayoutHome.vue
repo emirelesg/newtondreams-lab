@@ -9,6 +9,7 @@
         <div class="fill-height">
           <window-wrapper></window-wrapper>
           <router-view></router-view>
+          <sim-controls></sim-controls>
         </div>
       </v-sheet>
     </v-content>
@@ -16,11 +17,12 @@
 </template>
 
 <script>
-import AppToolbar from '@/components/AppToolbar';
-import AppSnackbar from '@/components/AppSnackbar';
-import AppHeader from '@/components/AppHeader';
-import AppNavigation from '@/components/AppNavigation';
-import WindowWrapper from '@/components/window/WindowWrapper';
+import AppToolbar from '@/components/AppToolbar.vue';
+import AppSnackbar from '@/components/AppSnackbar.vue';
+import AppHeader from '@/components/AppHeader.vue';
+import AppNavigation from '@/components/AppNavigation.vue';
+import SimControls from '@/components/sim/SimControls.vue';
+import WindowWrapper from '@/components/window/WindowWrapper.vue';
 
 export default {
   name: 'LayoutMain',
@@ -29,7 +31,8 @@ export default {
     AppHeader,
     AppNavigation,
     AppSnackbar,
-    WindowWrapper
+    WindowWrapper,
+    SimControls
   },
   data: () => ({})
 };
@@ -45,5 +48,6 @@ export default {
 }
 .full-screen .fill-height {
   position: relative;
+  overflow: hidden;
 }
 </style>

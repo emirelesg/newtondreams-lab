@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import SimHeader from '@/components/SimHeader.vue';
-import SimMixin from '@/components/SimMixin.js';
+import SimHeader from '@/components/sim/SimHeader.vue';
+import SimMixin from '@/components/sim/SimMixin.js';
 import BasicShapes from '@/lib/elements/BasicShapes';
 import { round, gaussianRandom } from '@/lib/utils';
 

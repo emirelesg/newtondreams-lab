@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import SimHeader from '@/components/SimHeader.vue';
-import SimMixin from '@/components/SimMixin.js';
+import SimHeader from '@/components/sim/SimHeader.vue';
+import SimMixin from '@/components/sim/SimMixin.js';
 import { state } from '@/store/index';
 import { round, guassianNoiseIf } from '@/lib/utils';
 import RailSystem from '@/lib/elements/RailSystem';
