@@ -32,16 +32,25 @@ export const labs = [
     path: 'mediciones',
     component: () =>
       import(
-        /* webpackChunkName: "lab.mediciones" */ '@/simulations/mediciones.vue'
+        /* webpackChunkName: "lab.mediciones" */ '@/simulations/Mediciones.vue'
       ),
     beforeEnter: actions.cleanup
   },
   {
-    name: 'Plano Inclinado',
-    path: 'plano_inclinado',
+    name: 'Movimiento Rectilíneo Uniforme',
+    path: 'movimiento_rectilineo_uniforme',
     component: () =>
       import(
-        /* webpackChunkName: "lab.plano_inclinado" */ '@/simulations/plano_inclinado.vue'
+        /* webpackChunkName: "lab.movimiento_rectilineo_uniforme" */ '@/simulations/MovimientoRectilineoUniforme.vue'
+      ),
+    beforeEnter: actions.cleanup
+  },
+  {
+    name: 'Movimiento Rectilíneo Acelerado',
+    path: 'movimiento_rectilineo_acelerado',
+    component: () =>
+      import(
+        /* webpackChunkName: "lab.movimiento_rectilineo_acelerado" */ '@/simulations/MovimientoRectilineoAcelerado.vue'
       ),
     beforeEnter: actions.cleanup
   }

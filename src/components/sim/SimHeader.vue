@@ -22,9 +22,15 @@ export default {
 .desc {
   position: absolute;
   padding: 16px;
-  text-align: center;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   user-select: none;
   pointer-events: none;
+}
+.desc > div {
+  text-align: center;
+  max-width: 450px;
 }
 </style>

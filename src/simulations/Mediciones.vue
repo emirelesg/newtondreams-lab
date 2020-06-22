@@ -5,7 +5,10 @@
       description="Mide los objectos haciendo clic sobre dos vertices."
     >
       <div class="primary--text font-weight-bold">
-        {{ getDistance() }}
+        <span v-if="model && model.distance">
+          {{ getDistance() }} &plusmn; {{ error }} mm
+        </span>
+        <span v-else>-</span>
       </div>
     </sim-header>
     <sim-controls @input="handleControls"></sim-controls>
@@ -27,7 +30,8 @@ export default {
     SimControls
   },
   data: () => ({
-    model: null
+    model: null,
+    error: 0.05
   }),
   methods: {
     setup() {
@@ -36,13 +40,10 @@ export default {
       this.app.scene.add(this.model);
     },
     getDistance() {
-      if (this.model && this.model.distance) {
-        return `${round(
-          this.model.distance + gaussianRandom(-0.2, 0.2),
-          2
-        )} cm`;
-      }
-      return `-`;
+      return `${round(
+        this.model.distance * 10 + gaussianRandom(-this.error, this.error),
+        2
+      ).toFixed(2)}`;
     }
   },
   mounted() {

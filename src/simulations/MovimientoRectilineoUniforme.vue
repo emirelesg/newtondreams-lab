@@ -1,12 +1,9 @@
 <template>
   <div ref="parent" class="full">
     <sim-header
-      title="Plano Inclinado"
-      description="Analiza el movimiento en un vehiculo en un plano inclinado."
+      title="Movimiento Rectilíneo Uniforme"
+      description="Analiza un vehículo con velocidad constante."
     >
-      <div class="warning--text font-weight-bold" v-if="animation.length === 1">
-        La fricción (&mu;<sub>s</sub>) impide el movimiento del vehículo.
-      </div>
     </sim-header>
     <sim-controls @input="handleControls"></sim-controls>
   </div>
@@ -40,20 +37,8 @@ const signals = {
   }
 };
 
-const controls = {
-  angle: {
-    type: 'slider',
-    label: 'Inclinación',
-    min: 0,
-    max: 20,
-    step: 1,
-    value: 10,
-    suffix: '°'
-  }
-};
-
 export default {
-  name: 'PlanoInclinado',
+  name: 'MovimientoRectilíneoUniforme',
   mixins: [SimMixin],
   components: {
     SimHeader,
@@ -69,7 +54,6 @@ export default {
       this.app.scene.add(this.model);
     },
     reset() {
-      this.model.setInclination(-this.settings.angle.value);
       this.setAnimationData(this.simulate(1 / 50, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },
@@ -80,16 +64,9 @@ export default {
       }
     },
     simulate(dt, noise) {
-      const theta = (this.settings.angle.value * Math.PI) / 180;
-      const sinx = Math.sin(theta);
-      const cosx = Math.cos(theta);
-      const g = 9.81;
-      const uk = 0.07;
-      const us = 0.09;
       let x = 0.02;
-      const aStatic = g * (sinx - us * cosx);
-      const a = g * (sinx - uk * cosx);
-      let v = 0;
+      let a = 0;
+      let v = 1;
       let t = 0;
       let signals = [];
       do {
@@ -102,12 +79,12 @@ export default {
         v += a * dt;
         x += v * dt;
         t += dt;
-      } while (x <= 0.85 && aStatic >= 0);
+      } while (x <= 0.85);
       return signals;
     }
   },
   mounted() {
-    this.init(['start'], ['graph', 'data', 'settings'], signals, controls);
+    this.init(['start'], ['graph', 'data'], signals, {});
   },
   beforeDestroy() {
     if (this.model) this.model.destroy();
