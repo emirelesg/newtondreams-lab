@@ -65,6 +65,7 @@ export default {
 #window .v-dialog__content {
   position: absolute;
   width: 600px;
+  z-index: 1 !important;
 }
 
 @media only screen and (max-width: 600px) {
