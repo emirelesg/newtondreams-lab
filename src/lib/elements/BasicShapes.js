@@ -6,8 +6,6 @@ import {
   CylinderBufferGeometry,
   SphereBufferGeometry,
   OctahedronBufferGeometry,
-  Raycaster,
-  Vector2,
   Vector3,
   Line,
   LineBasicMaterial,
@@ -85,16 +83,13 @@ export default class BasicShapes extends Object3D {
       new LineBasicMaterial({ color: colors.red.accent3 })
     );
 
-    this.raycaster = new Raycaster();
     this.localPoint = new Vector3();
     this.closestPoint = new Vector3();
     this.distance = null;
-    this.mouse = new Vector2();
-    this.isMouseDown = false;
 
     this.appRef = appRef;
-    this.events = ['mousemove', 'mouseup', 'mousedown'];
-    this.bindListeners();
+    this.appRef.opts.onMousemove = this.mousemove.bind(this);
+    this.appRef.opts.onClick = this.click.bind(this);
 
     this.shapes.forEach((obj, i) => {
       const { height, radius } = obj.geometry.parameters;
@@ -112,23 +107,12 @@ export default class BasicShapes extends Object3D {
       this.guide
     );
   }
-  bindListeners() {
-    this.events.forEach(e => {
-      this[e] = this[e].bind(this);
-      this.appRef.renderer.domElement.addEventListener(e, this[e]);
-    });
-  }
   destroy() {
-    this.events.forEach(e => {
-      this.appRef.renderer.domElement.removeEventListener(e, this[e]);
-    });
     this.appRef = null;
     disposeRecursive(this);
   }
-  mousedown() {
-    this.isMouseDown = true;
-  }
-  mouseup() {
+  click(isTouch) {
+    if (isTouch) this.mousemove(isTouch);
     if (this.movingPoint.visible) {
       if (
         (this.startPoint.visible && this.endPoint.visible) ||
@@ -146,17 +130,10 @@ export default class BasicShapes extends Object3D {
         this.drawGuide();
       }
     }
-    this.isMouseDown = false;
   }
-  mousemove({ target, clientX, clientY }) {
-    var rect = target.getBoundingClientRect();
-    this.mouse.set(
-      ((clientX - rect.left) / target.width) * 2 - 1,
-      (-(clientY - rect.top) / target.height) * 2 + 1
-    );
-    this.raycaster.setFromCamera(this.mouse, this.appRef.camera);
-    const intersects = this.raycaster.intersectObjects(this.shapes);
-    if (intersects.length > 0 && !this.isMouseDown) {
+  mousemove(isTouch) {
+    const intersects = this.appRef.raycaster.intersectObjects(this.shapes);
+    if (intersects.length > 0 && (isTouch || !this.appRef.mouse.isDown)) {
       let point = this.getClosestPointToEdge(intersects[0]);
       this.movingPoint.visible = true;
       this.movingPoint.position.copy(point);

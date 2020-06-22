@@ -11,10 +11,8 @@ import {
   MeshPhongMaterial,
   Mesh,
   PCFSoftShadowMap,
-  // AmbientLight,
-  Vector3
-  // PointLight,
-  // GridHelper
+  Vector3,
+  Raycaster
 } from 'three';
 import { state, mutations } from '@/store/index';
 import { disposeRecursive } from '@/lib/utils';
@@ -22,12 +20,24 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 class App {
   constructor(container, opts) {
-    this.opts = {};
+    this.opts = {
+      onMousemove: null,
+      onMouseup: null,
+      onMousedown: null,
+      onResize: null,
+      onClick: null
+    };
     Object.assign(this.opts, opts);
+
+    this.windowEvents = ['resize', 'orientationchange'];
+    this.events = ['mousedown', 'mouseup', 'mousemove', 'touchstart', 'click'];
+
     this.container = container;
     this.size = new Vector2();
     this.camera = new PerspectiveCamera(20, 1, 0.1, 1000);
     this.scene = new Scene();
+
+    this.raycaster = new Raycaster();
 
     // Load renderer from store or create a new one.
     if (state.renderer) {
@@ -62,6 +72,12 @@ class App {
     // // Limit the amount fo zoom.
     this.controls.minDistance = 100;
     this.controls.maxDistance = 250;
+
+    this.mouse = {
+      pos: new Vector2(),
+      forRaycasting: new Vector2(),
+      isDown: false
+    };
 
     // Init scene.
     this.home();
@@ -106,12 +122,26 @@ class App {
     this.scene.add(spotLight, hemiLight);
   }
   setCallbacks() {
-    this.onWindowResize = this.onWindowResize.bind(this);
-    window.addEventListener('resize', this.onWindowResize, false);
-    this.onWindowResize(true);
+    this.windowEvents.forEach(e => {
+      this[e] = this[e].bind(this);
+      window.addEventListener(e, this[e], false);
+    });
+    this.events.forEach(e => {
+      this[e] = this[e].bind(this);
+      this.renderer.domElement.addEventListener(e, this[e]);
+    });
+    this.resize(true);
   }
   clearCallbacks() {
-    window.removeEventListener('resize', this.onWindowResize, false);
+    this.windowEvents.forEach(e => {
+      window.removeEventListener(e, this[e]);
+    });
+    this.events.forEach(e => {
+      this.renderer.domElement.removeEventListener(e, this[e]);
+    });
+    Object.keys(this.opts).forEach(key => {
+      this.opts[key] = null;
+    });
   }
   home() {
     this.camera.position.set(0, 40, 150);
@@ -150,20 +180,29 @@ class App {
 
     // Remove all links to the outside.
     this.container.removeChild(this.renderer.domElement);
-    this.opts.onRender = null;
     this.container = null;
 
     // Clear camera, scene, and renderer.
+    this.raycaster = null;
     this.camera = null;
     this.scene.dispose();
     this.scene = null;
     this.renderer.setAnimationLoop(null);
     this.renderer = null;
   }
-  render() {
-    this.renderer.render(this.scene, this.camera);
+  setMousePosition({ target, clientX, clientY }) {
+    var rect = target.getBoundingClientRect();
+    this.mouse.pos.set(clientX - rect.left, clientY - rect.top);
+    this.mouse.forRaycasting.set(
+      (this.mouse.pos.x / (target.width / window.devicePixelRatio)) * 2 - 1,
+      (-this.mouse.pos.y / (target.height / window.devicePixelRatio)) * 2 + 1
+    );
+    this.raycaster.setFromCamera(this.mouse.forRaycasting, this.camera);
   }
-  onWindowResize(force) {
+  exec(f, ...args) {
+    if (f && typeof f === 'function') f(...args);
+  }
+  resize(force) {
     const width = this.container.clientWidth;
     const height = this.container.clientHeight;
     if (force || this.size.x !== width || this.size.y !== height) {
@@ -173,6 +212,35 @@ class App {
       this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
     }
+    this.exec(this.opts.onResize);
+  }
+  orientationchange() {
+    this.resize();
+  }
+  mousemove(e) {
+    this.setMousePosition(e);
+    this.exec(this.opts.onMousemove);
+  }
+  mousedown(e) {
+    this.setMousePosition(e);
+    this.mouse.isDown = true;
+    this.exec(this.opts.onMousedown);
+  }
+  mouseup(e) {
+    this.setMousePosition(e);
+    this.mouse.isDown = false;
+    this.exec(this.opts.onMouseup);
+  }
+  touchstart(e) {
+    if (e.targetTouches) {
+      e.preventDefault();
+      this.setMousePosition(e.targetTouches[0]);
+      this.exec(this.opts.onClick, true);
+    }
+  }
+  click(e) {
+    this.setMousePosition(e);
+    this.exec(this.opts.onClick);
   }
 }
 
