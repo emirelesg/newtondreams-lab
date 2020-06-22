@@ -1,12 +1,12 @@
 <template>
   <div class="sim-controls d-flex">
-    <v-btn fab small class="mb-3 secondary--text">
+    <v-btn fab small class="mb-3 secondary--text" @click="zoomIn">
       <v-icon>mdi-magnify-plus-outline</v-icon>
     </v-btn>
-    <v-btn fab small class="mb-3 secondary--text">
+    <v-btn fab small class="mb-3 secondary--text" @click="zoomOut">
       <v-icon>mdi-magnify-minus-outline</v-icon>
     </v-btn>
-    <v-btn fab small class="secondary--text">
+    <v-btn fab small class="secondary--text" @click="home">
       <v-icon>mdi-home</v-icon>
     </v-btn>
   </div>
@@ -14,7 +14,19 @@
 
 <script>
 export default {
-  name: 'SimControls'
+  name: 'SimControls',
+  data: () => ({}),
+  methods: {
+    zoomIn() {
+      this.$emit('input', 'zoomIn');
+    },
+    zoomOut() {
+      this.$emit('input', 'zoomOut');
+    },
+    home() {
+      this.$emit('input', 'home');
+    }
+  }
 };
 </script>
 

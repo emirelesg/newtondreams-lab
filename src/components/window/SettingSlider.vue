@@ -8,6 +8,7 @@
       :step="conf.step"
       :max="conf.max"
       :min="conf.min"
+      class="setting-slider"
     >
     </v-slider>
     <div style="width: 60px" class="ml-3">
@@ -46,3 +47,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.setting-slider >>> .v-slider {
+  cursor: pointer !important;
+}
+</style>

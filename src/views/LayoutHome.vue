@@ -9,7 +9,6 @@
         <div class="fill-height">
           <window-wrapper></window-wrapper>
           <router-view></router-view>
-          <sim-controls></sim-controls>
         </div>
       </v-sheet>
     </v-content>
@@ -21,7 +20,6 @@ import AppToolbar from '@/components/AppToolbar.vue';
 import AppSnackbar from '@/components/AppSnackbar.vue';
 import AppHeader from '@/components/AppHeader.vue';
 import AppNavigation from '@/components/AppNavigation.vue';
-import SimControls from '@/components/sim/SimControls.vue';
 import WindowWrapper from '@/components/window/WindowWrapper.vue';
 
 export default {
@@ -31,8 +29,7 @@ export default {
     AppHeader,
     AppNavigation,
     AppSnackbar,
-    WindowWrapper,
-    SimControls
+    WindowWrapper
   },
   data: () => ({})
 };

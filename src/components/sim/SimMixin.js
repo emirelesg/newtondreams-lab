@@ -27,6 +27,11 @@ export default {
       this._step = 0;
       this.animation = animation;
     },
+    handleControls(action) {
+      if (this.app) {
+        this.app.handleControls(action);
+      }
+    },
     destroy() {
       state.bus.$off('reset', this._reset);
       if (this.app) this.app.destroy();

@@ -63,11 +63,8 @@ class App {
     this.controls.minDistance = 100;
     this.controls.maxDistance = 250;
 
-    this.camera.position.set(0, 40, 150);
-    this.controls.target = new Vector3(0, 0, 0);
-    this.controls.update();
-
     // Init scene.
+    this.home();
     this.initScene();
     this.setCallbacks();
   }
@@ -115,6 +112,33 @@ class App {
   }
   clearCallbacks() {
     window.removeEventListener('resize', this.onWindowResize, false);
+  }
+  home() {
+    this.camera.position.set(0, 40, 150);
+    this.controls.target = new Vector3(0, 0, 0);
+    this.camera.lookAt(0, 0, 0);
+    this.controls.update();
+  }
+  zoom(scale) {
+    let pos = this.camera.position.clone();
+    let length = pos.length();
+    pos.normalize().multiplyScalar(length * scale);
+    this.camera.position.copy(pos);
+    this.camera.updateProjectionMatrix();
+    this.controls.update();
+  }
+  handleControls(action) {
+    switch (action) {
+      case 'zoomIn':
+        this.zoom(0.9);
+        break;
+      case 'zoomOut':
+        this.zoom(1.1);
+        break;
+      case 'home':
+        this.home();
+        break;
+    }
   }
   destroy() {
     // Clear all objects in the scene.

@@ -8,10 +8,12 @@
         La fricción (&mu;<sub>s</sub>) impide el movimiento del vehículo.
       </div>
     </sim-header>
+    <sim-controls @input="handleControls"></sim-controls>
   </div>
 </template>
 
 <script>
+import SimControls from '@/components/sim/SimControls.vue';
 import SimHeader from '@/components/sim/SimHeader.vue';
 import SimMixin from '@/components/sim/SimMixin.js';
 import { state } from '@/store/index';
@@ -54,7 +56,8 @@ export default {
   name: 'PlanoInclinado',
   mixins: [SimMixin],
   components: {
-    SimHeader
+    SimHeader,
+    SimControls
   },
   data: () => ({
     model: null

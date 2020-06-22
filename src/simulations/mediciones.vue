@@ -8,20 +8,23 @@
         {{ getDistance() }}
       </div>
     </sim-header>
+    <sim-controls @input="handleControls"></sim-controls>
   </div>
 </template>
 
 <script>
+import SimControls from '@/components/sim/SimControls.vue';
 import SimHeader from '@/components/sim/SimHeader.vue';
 import SimMixin from '@/components/sim/SimMixin.js';
-import BasicShapes from '@/lib/elements/BasicShapes';
-import { round, gaussianRandom } from '@/lib/utils';
+import BasicShapes from '@/lib/elements/BasicShapes.js';
+import { round, gaussianRandom } from '@/lib/utils.js';
 
 export default {
   name: 'Mediciones',
   mixins: [SimMixin],
   components: {
-    SimHeader
+    SimHeader,
+    SimControls
   },
   data: () => ({
     model: null
