@@ -6,6 +6,7 @@
       no-click-animation
       persistent
       scrollable
+      :transition="false"
       :retain-focus="false"
       hide-overlay
       @input="close"

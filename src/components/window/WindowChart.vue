@@ -45,9 +45,9 @@ export default {
       legend: {
         display: false
       },
-      // animation: {
-      //   duration: 0
-      // },
+      animation: {
+        duration: 0
+      },
       hover: {
         animationDuration: 0
       },

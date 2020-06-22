@@ -72,8 +72,10 @@ export default {
   .toolbar-container >>> button .v-btn__content i {
     margin-right: 0px;
   }
-
   .toolbar-container >>> button .v-btn__content span {
+    display: none;
+  }
+  hr {
     display: none;
   }
 }
