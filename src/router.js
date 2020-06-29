@@ -53,6 +53,24 @@ export const labs = [
         /* webpackChunkName: "lab.movimiento_rectilineo_acelerado" */ '@/simulations/MovimientoRectilineoAcelerado.vue'
       ),
     beforeEnter: actions.cleanup
+  },
+  {
+    name: 'Plano Inclinado',
+    path: 'plano_inclinado',
+    component: () =>
+      import(
+        /* webpackChunkName: "lab.plano_inclinado" */ '@/simulations/PlanoInclinado.vue'
+      ),
+    beforeEnter: actions.cleanup
+  },
+  {
+    name: 'Tiro Parabólico',
+    path: 'tiro_parabólico',
+    component: () =>
+      import(
+        /* webpackChunkName: "lab.tiro_parabolico" */ '@/simulations/TiroParabolico.vue'
+      ),
+    beforeEnter: actions.cleanup
   }
 ];
 

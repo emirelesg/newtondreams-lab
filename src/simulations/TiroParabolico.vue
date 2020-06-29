@@ -1,8 +1,8 @@
 <template>
   <div ref="parent" class="full">
     <sim-header
-      title="Movimiento Rectilíneo Acelerado"
-      description="Analiza un vehículo con aceleración constante."
+      title="Tiro Parabólico"
+      description="Determina el ángulo de lanzamiento con mayor alcance."
     >
     </sim-header>
     <sim-controls @input="handleControls"></sim-controls>
@@ -15,10 +15,20 @@ import SimHeader from '@/components/sim/SimHeader.vue';
 import SimMixin from '@/components/sim/SimMixin.js';
 
 const signals = {};
-const controls = {};
+const controls = {
+  angle: {
+    type: 'slider',
+    label: 'Inclinación',
+    min: 0,
+    max: 20,
+    step: 1,
+    value: 10,
+    suffix: '°'
+  }
+};
 
 export default {
-  name: 'MovimientoRectilineoAcelerado',
+  name: 'TiroParabolico',
   mixins: [SimMixin],
   components: {
     SimHeader,
@@ -33,7 +43,7 @@ export default {
     draw() {}
   },
   mounted() {
-    this.init([], [], signals, controls);
+    this.init([], ['settings'], signals, controls);
   },
   beforeDestroy() {},
   computed: {}

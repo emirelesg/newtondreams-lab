@@ -23,41 +23,37 @@ export default class BasicShapes extends Object3D {
       new Mesh(
         new OctahedronBufferGeometry(5, 0),
         new MeshPhongMaterial({
-          color: colors.deepPurple.base,
-          opacity: this.OPACITY,
-          transparent: true
+          color: colors.deepPurple.base
         })
       ),
       new Mesh(
         new CylinderBufferGeometry(5, 5, 10, 20),
         new MeshPhongMaterial({
-          color: colors.blue.base,
-          opacity: this.OPACITY,
-          transparent: true
+          color: colors.blue.base
         })
       ),
       new Mesh(
-        new BoxBufferGeometry(5, 5, 5),
+        new BoxBufferGeometry(5, 12.5, 5),
         new MeshPhongMaterial({
-          color: colors.green.base,
-          opacity: this.OPACITY,
-          transparent: true
+          color: colors.cyan.base
+        })
+      ),
+      new Mesh(
+        new BoxBufferGeometry(7.5, 7.5, 7.5),
+        new MeshPhongMaterial({
+          color: colors.green.base
         })
       ),
       new Mesh(
         new CylinderBufferGeometry(0, 5, 10, 20),
         new MeshPhongMaterial({
-          color: colors.orange.base,
-          opacity: this.OPACITY,
-          transparent: true
+          color: colors.orange.base
         })
       ),
       new Mesh(
         new SphereBufferGeometry(5, 20, 20),
         new MeshPhongMaterial({
-          color: colors.red.base,
-          opacity: this.OPACITY,
-          transparent: true
+          color: colors.red.base
         })
       )
     ];
@@ -93,7 +89,9 @@ export default class BasicShapes extends Object3D {
 
     this.shapes.forEach((obj, i) => {
       const { height, radius } = obj.geometry.parameters;
-      obj.position.x = 25 * (i / 2 - 1);
+      obj.material.transparent = true;
+      obj.material.opacity = this.OPACITY;
+      obj.position.x = 60 * (i / (this.shapes.length - 1) - 0.5);
       obj.position.y = height ? height / 2 : radius;
       obj.receiveShadow = true;
       obj.castShadow = true;
