@@ -22,8 +22,8 @@
 
 <script>
 import AppFooter from '@/components/AppFooter.vue';
-import { mutations, state } from '@/store/index';
-import { labs } from '@/router';
+import { mutations, state } from '@/store/index.js';
+import labs from '@/simulations/index.js';
 
 export default {
   name: 'AppNavigation',

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { getters, actions } from '@/store/index';
 import LayoutHome from '@/views/LayoutHome';
+import labs from '@/simulations/index.js';
 import LayoutSignIn from '@/views/LayoutSignIn';
 
 Vue.use(VueRouter);
@@ -11,9 +12,9 @@ Vue.use(VueRouter);
 const ifNotAuthenticated = (to, from, next) => {
   if (!getters.isAuthenticated()) {
     next();
-    return;
+  } else {
+    next('/');
   }
-  next('/');
 };
 
 // Middleware for pages that require authentication.
@@ -21,58 +22,10 @@ const ifNotAuthenticated = (to, from, next) => {
 const ifAuthenticated = (to, from, next) => {
   if (getters.isAuthenticated()) {
     next();
-    return;
+  } else {
+    next('/sign-in');
   }
-  next('/sign-in');
 };
-
-export const labs = [
-  {
-    name: 'Mediciones',
-    path: 'mediciones',
-    component: () =>
-      import(
-        /* webpackChunkName: "lab.mediciones" */ '@/simulations/Mediciones.vue'
-      ),
-    beforeEnter: actions.cleanup
-  },
-  {
-    name: 'Movimiento Rectilíneo Uniforme',
-    path: 'movimiento_rectilineo_uniforme',
-    component: () =>
-      import(
-        /* webpackChunkName: "lab.movimiento_rectilineo_uniforme" */ '@/simulations/MovimientoRectilineoUniforme.vue'
-      ),
-    beforeEnter: actions.cleanup
-  },
-  {
-    name: 'Movimiento Rectilíneo Acelerado',
-    path: 'movimiento_rectilineo_acelerado',
-    component: () =>
-      import(
-        /* webpackChunkName: "lab.movimiento_rectilineo_acelerado" */ '@/simulations/MovimientoRectilineoAcelerado.vue'
-      ),
-    beforeEnter: actions.cleanup
-  },
-  {
-    name: 'Plano Inclinado',
-    path: 'plano_inclinado',
-    component: () =>
-      import(
-        /* webpackChunkName: "lab.plano_inclinado" */ '@/simulations/PlanoInclinado.vue'
-      ),
-    beforeEnter: actions.cleanup
-  },
-  {
-    name: 'Tiro Parabólico',
-    path: 'tiro_parabólico',
-    component: () =>
-      import(
-        /* webpackChunkName: "lab.tiro_parabolico" */ '@/simulations/TiroParabolico.vue'
-      ),
-    beforeEnter: actions.cleanup
-  }
-];
 
 const router = new VueRouter({
   mode: 'history',
@@ -86,7 +39,7 @@ const router = new VueRouter({
       name: 'home',
       component: LayoutHome,
       beforeEnter: ifAuthenticated,
-      children: labs
+      children: labs.map(lab => ({ ...lab, beforeEnter: actions.cleanup }))
     },
     {
       path: '/sign-in',
