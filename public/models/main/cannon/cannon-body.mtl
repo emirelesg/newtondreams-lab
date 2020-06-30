@@ -1,0 +1,6 @@
+# FreeCAD v0.18.4 build Arch module
+# http://www.freecadweb.org
+newmtl color_444444
+Kd 0.2666666805744171 0.2666666805744171 0.2666666805744171
+d 0
+# Material Count: 1
