@@ -1,53 +1,40 @@
-import { Object3D, Color } from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { disposeRecursive } from '@/lib/utils';
+import { Color } from 'three';
+import BaseSystem from './Base';
 
-export default class RailSystem extends Object3D {
+export default class RailSystem extends BaseSystem {
   constructor() {
-    super();
-    this.models = [];
+    super([
+      'rails/rails.gltf',
+      'car/car.gltf',
+      'sensor/sensor.gltf',
+      'stopper/stopper.gltf'
+    ]);
     this.car = null;
     this.rail = null;
     this.sensor = null;
     this.stopper = null;
-    var loader = new GLTFLoader().setPath('models/main/');
-    loader.load('rails/rails.gltf', this.loadRail.bind(this));
-    loader.load('car/car.gltf', this.loadCar.bind(this));
-    loader.load('sensor/sensor.gltf', this.loadSensor.bind(this));
-    loader.load('stopper/stopper.gltf', this.loadStopper.bind(this));
   }
-  preprocess({ scene }) {
-    scene.scale.multiplyScalar(1 / 10);
-    scene.traverse(function (child) {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    return scene;
-  }
-  loadRail(model) {
-    this.rail = this.preprocess(model);
+  onLoad([rail, car, sensor, stopper]) {
+    // Rail.
+    this.rail = rail;
     this.rail.rotation.y = Math.PI / 2;
     this.rail.position.x = -50;
-    this.add(this.rail);
-  }
-  loadCar(model) {
-    this.car = this.preprocess(model);
+
+    // Car.
+    this.car = car;
     this.car.children[4].material.color = new Color('#aadd00');
-    this.add(this.car);
-  }
-  loadSensor(model) {
-    this.sensor = this.preprocess(model);
+
+    // Sensor.
+    this.sensor = sensor;
     this.sensor.rotation.y = Math.PI;
     this.sensor.position.x = -48;
-    this.add(this.sensor);
-  }
-  loadStopper(model) {
-    this.stopper = this.preprocess(model);
+
+    // Stopper.
+    this.stopper = stopper;
     this.stopper.rotation.y = Math.PI / 2;
     this.stopper.position.x = 50 - 0.5;
-    this.add(this.stopper);
+
+    this.add(this.rail, this.car, this.sensor, this.stopper);
   }
   setInclination(angle) {
     this.rotation.z = (angle * Math.PI) / 180;
@@ -55,7 +42,7 @@ export default class RailSystem extends Object3D {
     this.position.x = 50 - 50 * Math.cos(-this.rotation.z);
   }
   destroy() {
-    disposeRecursive(this);
+    this.dispose();
     this.car = null;
     this.rail = null;
     this.sensor = null;

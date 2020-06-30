@@ -67,20 +67,23 @@ export default {
       if (this.model) this.model.destroy();
       this.model = new RailSystem();
       this.app.scene.add(this.model);
+      return this.model.load();
     },
     reset() {
-      this.model.setInclination(-this.settings.angle.value);
+      if (this.model && this.model.loaded) {
+        this.model.setInclination(-state.sim.settings.angle.value);
+      }
       this.setAnimationData(this.simulate(1 / 50, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },
     draw(frame) {
-      if (frame && this.model.car) {
+      if (frame && this.model && this.model.loaded) {
         const { x } = frame;
         this.model.car.position.x = -37 + x * 100;
       }
     },
     simulate(dt, noise) {
-      const theta = (this.settings.angle.value * Math.PI) / 180;
+      const theta = (state.sim.settings.angle.value * Math.PI) / 180;
       const sinx = Math.sin(theta);
       const cosx = Math.cos(theta);
       const g = 9.81;
@@ -113,9 +116,6 @@ export default {
     if (this.model) this.model.destroy();
     this.model = null;
     this.destroy();
-  },
-  computed: {
-    settings: () => state.sim.settings
   }
 };
 </script>

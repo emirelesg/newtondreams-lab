@@ -106,8 +106,11 @@ export default class BasicShapes extends Object3D {
     );
   }
   destroy() {
-    this.appRef = null;
     disposeRecursive(this);
+    this.appRef = null;
+    for (let i = 0; i < this.shapes.length; i++) {
+      this.shapes[i] = null;
+    }
   }
   click(isTouch) {
     if (isTouch) this.mousemove(isTouch);

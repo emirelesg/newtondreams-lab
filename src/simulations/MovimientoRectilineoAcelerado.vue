@@ -35,7 +35,11 @@ export default {
   mounted() {
     this.init([], [], signals, controls);
   },
-  beforeDestroy() {},
+  beforeDestroy() {
+    if (this.model) this.model.destroy();
+    this.model = null;
+    this.destroy();
+  },
   computed: {}
 };
 </script>
