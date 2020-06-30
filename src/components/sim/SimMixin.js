@@ -8,14 +8,14 @@ export default {
   }),
   methods: {
     init(enabledControls, enabledWindows, signals, settings) {
-      this.$nextTick(() => {
+      this.$nextTick(async () => {
         this.setAnimationData([]);
         mutations.setEnabledWindows(enabledWindows);
         mutations.setSimSignals(signals);
         mutations.setSimSettings(settings);
         state.bus.$on('reset', this._reset);
         this._setup();
-        this.setup();
+        await this.setup();
         mutations.resetSim();
         mutations.setEnabledControls(enabledControls);
       });
