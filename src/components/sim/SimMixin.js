@@ -48,7 +48,7 @@ export default {
     _draw() {
       if (this.draw) {
         if (this.animation.length > 0) {
-          this.draw(this.animation[this._step]);
+          this.draw(this.animation[this._step], this._step);
         } else {
           this.draw();
         }
