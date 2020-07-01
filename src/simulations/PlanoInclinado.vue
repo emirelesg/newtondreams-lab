@@ -19,6 +19,7 @@ import SimMixin from '@/components/sim/SimMixin.js';
 import { state } from '@/store/index';
 import { round, guassianNoiseIf } from '@/lib/utils';
 import RailSystem from '@/lib/elements/RailSystem';
+import colors from 'vuetify/lib/util/colors';
 
 const signals = {
   t: {
@@ -71,6 +72,7 @@ export default {
     },
     reset() {
       if (this.model && this.model.loaded) {
+        this.model.setCarColor(colors.orange.lighten1);
         this.model.setInclination(-state.sim.settings.angle.value);
       }
       this.setAnimationData(this.simulate(1 / 50, false));

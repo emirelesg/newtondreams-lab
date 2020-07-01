@@ -16,6 +16,7 @@ import SimMixin from '@/components/sim/SimMixin.js';
 import { state } from '@/store/index';
 import { round, guassianNoiseIf } from '@/lib/utils';
 import RailSystem from '@/lib/elements/RailSystem';
+import colors from 'vuetify/lib/util/colors';
 
 const signals = {
   t: {
@@ -56,6 +57,9 @@ export default {
       return this.model.load();
     },
     reset() {
+      if (this.model && this.model.loaded) {
+        this.model.setCarColor(colors.green.lighten1);
+      }
       this.setAnimationData(this.simulate(1 / 50, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },

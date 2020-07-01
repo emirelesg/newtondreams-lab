@@ -1,4 +1,3 @@
-import { Color } from 'three';
 import BaseSystem from './Base';
 
 export default class RailSystem extends BaseSystem {
@@ -22,7 +21,6 @@ export default class RailSystem extends BaseSystem {
 
     // Car.
     this.car = car;
-    this.car.children[4].material.color = new Color('#aadd00');
 
     // Sensor.
     this.sensor = sensor;
@@ -35,6 +33,12 @@ export default class RailSystem extends BaseSystem {
     this.stopper.position.x = 50 - 0.5;
 
     this.add(this.rail, this.car, this.sensor, this.stopper);
+  }
+  setCarColor(color) {
+    const carBody = this.car.children.find(
+      obj => obj.name === 'b_car_body_001_'
+    );
+    carBody.material.color.set(color);
   }
   setInclination(angle) {
     this.rotation.z = (angle * Math.PI) / 180;
