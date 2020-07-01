@@ -31,7 +31,7 @@ export default class ProjectileSystem extends BaseSystem {
         color: new Color('#aaaaaa')
       })
     );
-    this.position.set(-50, -2.5, 0);
+    this.position.set(-35, -2.5, 0);
   }
   setPath(data) {
     data.forEach(({ x, y }, i) => {
