@@ -61,20 +61,18 @@ export default {
       return this.model.load();
     },
     reset() {
+      this.setAnimationData(this.simulate(1 / 60, false));
+      this.setSimulationData(this.simulate(state.sim.sampleTime, true));
       if (this.model && this.model.loaded) {
         this.model.setInclination(state.sim.settings.angle.value);
+        this.model.setPath(this.animation);
       }
-      this.setAnimationData(this.simulate(1 / 50, false));
-      this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },
-    draw(frame) {
+    draw(frame, i) {
       if (frame && this.model && this.model.loaded) {
         const { x, y } = frame;
-        this.model.projectile.position.set(
-          this.model.offset.x + x * 100,
-          y * 100,
-          0
-        );
+        this.model.projectile.position.set(x * 100, y * 100, 0);
+        this.model.setPathDisplayLimit(i);
       }
     },
     simulate(dt, noise) {
