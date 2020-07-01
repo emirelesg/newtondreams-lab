@@ -6,6 +6,20 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/lab/' : '/',
   // https://github.com/vuejs/vue-cli/issues/979
   chainWebpack: config => {
+    config.optimization.splitChunks({
+      cacheGroups: {
+        vendors: {
+          name: `chunk-vendors`,
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'initial'
+        }
+        // three: {
+        //   test: /[\\/]node_modules[\\/](three)[\\/]/,
+        //   name: 'three',
+        //   chunks: 'all'
+        // },
+      }
+    });
     if (config.plugins.has('prefetch')) {
       config.plugin('prefetch').tap(options => {
         options[0].fileBlacklist = options.fileBlacklist || [];
