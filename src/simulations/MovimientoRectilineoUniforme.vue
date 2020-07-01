@@ -33,9 +33,10 @@ const signals = {
   },
   a: {
     name: 'Aceleración',
-    units: 'm/s^2'
+    units: 'm/s<sup>2</sup>'
   }
 };
+const controls = {};
 
 export default {
   name: 'MovimientoRectilíneoUniforme',
@@ -85,7 +86,7 @@ export default {
     }
   },
   mounted() {
-    this.init(['start'], ['graph', 'data'], signals, {});
+    this.init(['start'], ['graph', 'data'], signals, controls);
   },
   beforeDestroy() {
     if (this.model) this.model.destroy();
