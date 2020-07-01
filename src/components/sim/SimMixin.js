@@ -13,9 +13,9 @@ export default {
         mutations.setEnabledWindows(enabledWindows);
         mutations.setSimSignals(signals);
         mutations.setSimSettings(settings);
-        state.bus.$on('reset', this._reset);
         this._setup();
         await this.setup();
+        state.bus.$on('reset', this._reset);
         mutations.resetSim();
         mutations.setEnabledControls(enabledControls);
       });

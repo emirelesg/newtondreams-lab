@@ -63,10 +63,8 @@ export default {
     reset() {
       this.setAnimationData(this.simulate(1 / 60, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
-      if (this.model && this.model.loaded) {
-        this.model.setInclination(state.sim.settings.angle.value);
-        this.model.setPath(this.animation);
-      }
+      this.model.setInclination(state.sim.settings.angle.value);
+      this.model.setPath(this.animation);
     },
     draw(frame, i) {
       if (frame && this.model && this.model.loaded) {

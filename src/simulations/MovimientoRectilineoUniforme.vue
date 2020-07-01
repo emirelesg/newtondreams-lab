@@ -57,9 +57,7 @@ export default {
       return this.model.load();
     },
     reset() {
-      if (this.model && this.model.loaded) {
-        this.model.setCarColor(colors.red.lighten1);
-      }
+      this.model.setCarColor(colors.red.lighten1);
       this.setAnimationData(this.simulate(1 / 50, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },
