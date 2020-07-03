@@ -1,9 +1,9 @@
 <template>
   <div class="sim-controls d-flex">
-    <v-btn fab small class="mb-3 secondary--text" @click="zoomIn">
+    <v-btn fab small class="secondary--text" @click="zoomIn">
       <v-icon>mdi-magnify-plus-outline</v-icon>
     </v-btn>
-    <v-btn fab small class="mb-3 secondary--text" @click="zoomOut">
+    <v-btn fab small class="secondary--text" @click="zoomOut">
       <v-icon>mdi-magnify-minus-outline</v-icon>
     </v-btn>
     <v-btn fab small class="secondary--text" @click="home">
@@ -36,5 +36,9 @@ export default {
   position: absolute;
   bottom: 32px;
   right: 32px;
+}
+
+.sim-controls button:not(:first-child) {
+  margin-top: 12px;
 }
 </style>
