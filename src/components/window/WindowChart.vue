@@ -1,22 +1,37 @@
 <template>
   <window-base title="Gráfica">
-    <div class="wrapper">
-      <div class="var-y">
-        <signal-selector
-          v-model="varY"
-          :signals="otherSignals"
-        ></signal-selector>
-      </div>
-      <chart
-        ref="chart"
-        :chart-data="data"
-        :styles="style"
-        :options="options"
-      ></chart>
-    </div>
-    <div class="var-x">
-      <signal-selector v-model="varX" :signals="timeSignals"></signal-selector>
-    </div>
+    <v-row no-gutters>
+      <v-col cols="12" class="mb-4">
+        <v-checkbox
+          v-model="yMinAtZero"
+          hide-details
+          class="mt-0 pt-0"
+          label="Iniciar eje vertical en 0"
+        ></v-checkbox>
+      </v-col>
+      <v-col cols="12">
+        <div class="wrapper">
+          <div class="var-y">
+            <signal-selector
+              v-model="varY"
+              :signals="otherSignals"
+            ></signal-selector>
+          </div>
+          <chart
+            ref="chart"
+            :chart-data="data"
+            :styles="style"
+            :options="options"
+          ></chart>
+        </div>
+        <div class="var-x">
+          <signal-selector
+            v-model="varX"
+            :signals="timeSignals"
+          ></signal-selector>
+        </div>
+      </v-col>
+    </v-row>
   </window-base>
 </template>
 
@@ -35,8 +50,9 @@ export default {
     SignalSelector
   },
   data: () => ({
+    yMinAtZero: false,
     style: {
-      height: '300px',
+      height: '284px',
       width: '100%'
     },
     options: {
@@ -93,6 +109,9 @@ export default {
     needsInit: false
   }),
   watch: {
+    yMinAtZero() {
+      this.init();
+    },
     varX() {
       this.init();
     },
@@ -137,11 +156,10 @@ export default {
       if (this.varY) {
         const { units } = this.otherSignals[this.varY];
         this.yValues = this.datapoints.map(point => point[this.varY]);
+        const min = this.yMinAtZero ? 0 : Math.min(...this.yValues);
+        const max = Math.max(...this.yValues);
         this.$refs.chart.yUnits(units);
-        this.$refs.chart.ylim(
-          Math.min(...this.yValues),
-          Math.max(...this.yValues)
-        );
+        this.$refs.chart.ylim(min, max);
       } else {
         this.yValues = [];
         this.$refs.chart.ylim(0, 0);
