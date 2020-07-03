@@ -168,6 +168,7 @@ export default {
     }
   },
   activated() {
+    this.yMinAtZero = false;
     this.isActive = true;
     this.$nextTick(() => {
       if (this.needsInit) {
