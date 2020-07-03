@@ -64,13 +64,21 @@ export default {
 <style scoped>
 #window .v-dialog__content {
   position: absolute;
+  left: auto;
+  right: 0;
+  opacity: 0.75;
   width: 600px;
   z-index: 1 !important;
+}
+
+#window .v-dialog__content:hover {
+  opacity: 1;
 }
 
 @media only screen and (max-width: 600px) {
   #window .v-dialog__content {
     width: 100%;
+    opacity: 1;
   }
 }
 </style>
