@@ -8,9 +8,9 @@
         v-on="scope.on"
         class="selector-btn"
       >
-        <span
-          v-html="validSelection ? getLabel(signals[value]) : 'Sin señales'"
-        ></span>
+        <span>
+          {{ validSelection ? getLabel(signals[value]) : 'Sin señales' }}
+        </span>
         <v-icon right size="20">
           {{ scope.value ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
         </v-icon>
@@ -23,7 +23,7 @@
         mandatory
       >
         <v-list-item v-for="(signal, idx) in signals" :value="idx" :key="idx">
-          <v-list-item-title v-html="getLabel(signal)"></v-list-item-title>
+          <v-list-item-title>{{ getLabel(signal) }}</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>

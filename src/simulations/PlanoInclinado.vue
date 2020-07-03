@@ -37,7 +37,7 @@ const signals = {
   },
   a: {
     name: 'Aceleración',
-    units: 'm/s^2'
+    units: 'm/s²'
   }
 };
 
