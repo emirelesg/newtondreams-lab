@@ -145,7 +145,7 @@ class App {
     });
   }
   home() {
-    this.camera.position.set(0, 40, 150);
+    this.camera.position.set(0, 40, 200);
     this.controls.target = new Vector3(0, 0, 0);
     this.camera.lookAt(0, 0, 0);
     this.controls.update();
