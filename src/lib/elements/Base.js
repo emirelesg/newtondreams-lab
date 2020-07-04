@@ -1,4 +1,4 @@
-import { Object3D } from 'three';
+import { Object3D, FontLoader, TextGeometry } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { disposeRecursive } from '@/lib/utils';
 
@@ -20,7 +20,9 @@ export default class BaseSystem extends Object3D {
     super();
     this.loaded = false;
     this.elements = elements;
-    this.loader = new GLTFLoader().setPath('models/main/');
+    this.font = null;
+    this.loaderGLTF = new GLTFLoader().setPath('models/main/');
+    this.loaderFont = new FontLoader().setPath('models/fonts/');
   }
   load() {
     return new Promise((resolve, reject) => {
@@ -41,7 +43,7 @@ export default class BaseSystem extends Object3D {
   }
   loadOne(path) {
     return new Promise((resolve, reject) => {
-      this.loader.load(
+      this.loaderGLTF.load(
         path,
         obj => resolve(preprocessGltf(obj)),
         undefined,
@@ -49,8 +51,33 @@ export default class BaseSystem extends Object3D {
       );
     });
   }
-  dispose() {
+  loadFont() {
+    return new Promise((resolve, reject) => {
+      this.loaderFont.load(
+        'helvetiker_regular.typeface.json',
+        font => {
+          this.font = font;
+          return resolve(true);
+        },
+        undefined,
+        reject
+      );
+    });
+  }
+  getTextGeo(text, opts) {
+    if (this.font) {
+      const textGeo = new TextGeometry(text, {
+        font: this.font,
+        ...opts
+      });
+      textGeo.computeBoundingBox();
+      return textGeo;
+    }
+    return undefined;
+  }
+  dispose(obj) {
     this.loaded = false;
-    disposeRecursive(this);
+    disposeRecursive(obj || this);
+    this.font = null;
   }
 }
