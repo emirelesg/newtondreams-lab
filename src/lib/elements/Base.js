@@ -19,7 +19,7 @@ export default class BaseSystem extends Object3D {
   constructor(elements) {
     super();
     this.loaded = false;
-    this.elements = elements;
+    this.elements = elements || [];
     this.font = null;
     this.loaderGLTF = new GLTFLoader().setPath('models/main/');
     this.loaderFont = new FontLoader().setPath('models/fonts/');
@@ -36,7 +36,7 @@ export default class BaseSystem extends Object3D {
     });
   }
   onLoad(objs) {
-    this.add(...objs);
+    if (objs.length > 0) this.add(...objs);
   }
   loadAll() {
     return Promise.all(this.elements.map(elements => this.loadOne(elements)));
