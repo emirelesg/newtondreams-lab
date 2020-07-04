@@ -37,7 +37,7 @@ const controls = {
     type: 'slider',
     label: 'Inclinación',
     min: 0,
-    max: 90,
+    max: 85,
     step: 5,
     value: 30,
     suffix: '°'
