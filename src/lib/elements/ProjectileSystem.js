@@ -16,7 +16,6 @@ export default class ProjectileSystem extends BaseSystem {
     super(['cannon/cannon.gltf', 'cannon/cannon-body.gltf']);
     this.cannon = null;
     this.cannonBody = null;
-    this.pathGeometry = new BufferGeometry();
     this.path = new Line(
       new BufferGeometry(),
       new LineBasicMaterial({ color: colors.pink.accent4 })
