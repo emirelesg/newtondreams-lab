@@ -15,7 +15,7 @@ import SimHeader from '@/components/sim/SimHeader.vue';
 import SimMixin from '@/components/sim/SimMixin.js';
 import { state } from '@/store/index';
 import { round, guassianNoiseIf } from '@/lib/utils';
-import RailSystem from '@/lib/elements/RailSystem';
+import RailSystemWithPulley from '@/lib/elements/RailSystemWithPulley';
 import colors from 'vuetify/lib/util/colors';
 
 const signals = {
@@ -52,8 +52,10 @@ export default {
   methods: {
     setup() {
       if (this.model) this.model.destroy();
-      this.model = new RailSystem();
+      this.model = new RailSystemWithPulley();
       this.app.scene.add(this.model);
+      this.model.position.y = 10;
+      this.app.floor.position.y = -40;
       return this.model.load();
     },
     reset() {
@@ -65,6 +67,8 @@ export default {
       if (frame && this.model && this.model.loaded) {
         const { x } = frame;
         this.model.car.position.x = -37 + x * 100;
+        this.model.weight.position.y = -2 - (x - 0.02) * 100;
+        this.model.updatePulley();
       }
     },
     simulate(dt, noise) {
@@ -73,6 +77,10 @@ export default {
       let v = 0;
       let t = 0;
       let signals = [];
+      const maxX =
+        (Math.abs(this.model.position.y) +
+          Math.abs(this.app.floor.position.y)) /
+        100;
       do {
         signals.push({
           t: round(t, 2),
@@ -83,7 +91,7 @@ export default {
         v += a * dt;
         x += v * dt;
         t += dt;
-      } while (x <= 0.85);
+      } while (x <= maxX);
       return signals;
     }
   },
