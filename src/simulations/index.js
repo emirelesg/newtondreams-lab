@@ -75,5 +75,11 @@ export default [
     path: 'tiro_parabólico',
     component: () =>
       import(/* webpackChunkName: "lab" */ '@/simulations/TiroParabolico.vue')
+  },
+  {
+    name: 'Caida Libre',
+    path: 'caida_libre',
+    component: () =>
+      import(/* webpackChunkName: "lab" */ '@/simulations/CaidaLibre.vue')
   }
 ];

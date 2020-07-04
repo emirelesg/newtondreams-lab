@@ -37,6 +37,8 @@ export default class ProjectileSystem extends BaseSystem {
         color: new Color('#aaaaaa')
       })
     );
+    this.projectile.castShadow = true;
+    this.projectile.receiveShadow = true;
 
     // Ruler.
     this.ruler = new Group();
@@ -45,18 +47,22 @@ export default class ProjectileSystem extends BaseSystem {
     });
     this.ruler.position.y = -1.49;
     this.ruler.rotation.x = -Math.PI / 2;
-    this.add(this.ruler);
     this.loadFont().then(this.drawRuler.bind(this));
 
-    this.position.set(-35, -2.5, 0);
+    this.add(this.ruler, this.projectile, this.path);
+    this.position.set(-35, -4 + 1.5, 0);
   }
   drawRuler() {
-    for (let i = 2; i < 15; i += 1) {
+    for (let i = 2; i < 16; i += 1) {
       // Position where a tick will be drawn.
       const x = i * 5;
 
       // Create a text geometry and compute its bounding box to center it later.
-      const textGeo = this.getTextGeo(`${x} cm`, { size: 0.9, height: 0 });
+      const textGeo = this.getTextGeo(`${x} cm`, {
+        size: 0.9,
+        height: 0,
+        curveSegments: 1
+      });
 
       // Build the meshes for the tick and geomtery.
       const tick = new Mesh(
@@ -102,13 +108,10 @@ export default class ProjectileSystem extends BaseSystem {
     this.cannon = cannon;
     this.cannon.rotation.x = -Math.PI / 2;
 
-    // Projectile.
-    this.projectile.castShadow = true;
-    this.projectile.receiveShadow = true;
-
-    this.add(this.cannon, this.cannonBody, this.projectile, this.path);
+    this.add(this.cannon, this.cannonBody);
   }
   destroy() {
+    this.dispose(this.ruler);
     this.dispose();
     this.rulerMaterial.dispose();
     this.rulerMaterial = null;
