@@ -70,8 +70,8 @@ class App {
     // this.controls.minAzimuthAngle = -Math.PI / 2;
 
     // // Limit the amount fo zoom.
-    this.controls.minDistance = 100;
-    this.controls.maxDistance = 250;
+    this.controls.minDistance = 75;
+    this.controls.maxDistance = 275;
 
     this.mouse = {
       pos: new Vector2(),
@@ -79,17 +79,23 @@ class App {
       isDown: false
     };
 
+    this.floor = new Mesh(
+      new PlaneBufferGeometry(500, 500),
+      new MeshPhongMaterial()
+    );
+
     // Init scene.
     this.home();
     this.initScene();
     this.setCallbacks();
   }
   initScene() {
-    // this.scene.background = new THREE.Color('#444');
     this.scene.background = new Color('#F5F7FA');
-
-    // Fog mixes the floor with the background.
-    this.scene.fog = new Fog(this.scene.background, 250, 400);
+    this.scene.fog = new Fog(
+      this.scene.background,
+      this.controls.maxDistance,
+      this.controls.maxDistance * 1.7
+    );
 
     // Lights up the scene globally.
     const hemiLight = new HemisphereLight(
@@ -98,8 +104,6 @@ class App {
       0.75
     );
     hemiLight.position.set(0, 50, 0);
-
-    // const ambientLight = new THREE.AmbientLight(new THREE.Color('#ffffff'), 0);
 
     // Spotlight lights up the scene from the from.
     const spotLight = new SpotLight(new Color('#ffffff'), 0.5);
@@ -110,14 +114,11 @@ class App {
     spotLight.position.set(0, 150, this.controls.maxDistance);
 
     // The floor receives shadows. Gives sense of depth.
-    const floor = new Mesh(
-      new PlaneBufferGeometry(500, 500),
-      new MeshPhongMaterial({ color: this.scene.background })
-    );
-    floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -4;
-    floor.receiveShadow = true;
-    this.scene.add(floor);
+    this.floor.material.color = this.scene.background;
+    this.floor.rotation.x = -Math.PI / 2;
+    this.floor.position.y = -4;
+    this.floor.receiveShadow = true;
+    this.scene.add(this.floor);
 
     this.scene.add(spotLight, hemiLight);
   }
@@ -173,6 +174,7 @@ class App {
   destroy() {
     // Clear all objects in the scene.
     this.scene.children.forEach(disposeRecursive);
+    this.floor = null;
 
     // Clear as soon as possible all callbacks.
     this.clearCallbacks();
