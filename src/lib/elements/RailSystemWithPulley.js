@@ -40,7 +40,6 @@ export default class RailSystemWithPulley extends BaseSystem {
       new CylinderBufferGeometry(1, 1, 2, 10),
       new MeshPhongMaterial({ color: colors.red.base })
     );
-    this.add(this.weight);
     this.weight.position.x =
       this.PULLEY_WHEEL_TOP_X + this.PULLEY_WHEEL_INNER_R;
     this.weight.castShadow = true;
@@ -51,7 +50,6 @@ export default class RailSystemWithPulley extends BaseSystem {
       new BufferGeometry(),
       new LineBasicMaterial({ color: new Color('#242424') })
     );
-    this.add(this.rope);
     this.rope.geometry.setAttribute(
       'position',
       new BufferAttribute(new Float32Array(3 * 10), 3)
@@ -67,6 +65,8 @@ export default class RailSystemWithPulley extends BaseSystem {
         this.PULLEY_WHEEL_OUTER_R * Math.sin(theta);
       this.rope.geometry.attributes.position.setXYZ(i + 1, x, y, 0);
     }
+
+    this.add(this.rope, this.weight);
   }
   updatePulley() {
     // Rotate wheel proportional to the amount the rope has moved.
@@ -91,6 +91,7 @@ export default class RailSystemWithPulley extends BaseSystem {
       0
     );
     this.rope.geometry.attributes.position.needsUpdate = true;
+    this.rope.visible = true;
   }
   onLoad([rail, car, sensor, pulley]) {
     // Rail.
