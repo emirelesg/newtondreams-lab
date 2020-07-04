@@ -16,7 +16,7 @@ import BaseSystem from './Base';
 export default class RailSystemWithPulley extends BaseSystem {
   constructor() {
     super([
-      'rails/rails.gltf',
+      'rails/rails-700.gltf',
       'car/car.gltf',
       'sensor/sensor.gltf',
       'pulley/pulley.gltf'
@@ -25,8 +25,7 @@ export default class RailSystemWithPulley extends BaseSystem {
     // Dimensions.
     this.pulleyPos = new Vector3(36, 0, 14);
     this.ROPE_HEIGHT = 2.8;
-    this.PULLEY_X = 48;
-    this.PULLEY_WHEEL_TOP_X = this.PULLEY_X + 1.2 + 2.4;
+    this.PULLEY_WHEEL_TOP_X = 35 - 2 + 1.2 + 2.4;
     this.PULLEY_WHEEL_INNER_R = 1.4;
     this.PULLEY_WHEEL_OUTER_R = 1.5;
 
@@ -97,7 +96,7 @@ export default class RailSystemWithPulley extends BaseSystem {
     // Rail.
     this.rail = rail;
     this.rail.rotation.y = Math.PI / 2;
-    this.rail.position.x = -50;
+    this.rail.position.x = -35;
 
     // Car.
     this.car = car;
@@ -105,13 +104,13 @@ export default class RailSystemWithPulley extends BaseSystem {
     // Sensor.
     this.sensor = sensor;
     this.sensor.rotation.y = Math.PI;
-    this.sensor.position.x = -48;
+    this.sensor.position.x = -35 + 2;
 
     // Pulley.
     this.pulley = pulley;
     this.pulley.rotation.x = -Math.PI / 2;
     this.pulley.position.y = 0.2;
-    this.pulley.position.x = 48;
+    this.pulley.position.x = 35 - 2;
     const wheel = this.getPulleyWheel();
     wheel.receiveShadow = false;
     wheel.castShadow = false;
@@ -129,8 +128,8 @@ export default class RailSystemWithPulley extends BaseSystem {
   }
   setInclination(angle) {
     this.rotation.z = (angle * Math.PI) / 180;
-    this.position.y = 50 * Math.sin(-this.rotation.z);
-    this.position.x = 50 - 50 * Math.cos(-this.rotation.z);
+    this.position.y = 35 * Math.sin(-this.rotation.z);
+    this.position.x = 35 - 35 * Math.cos(-this.rotation.z);
   }
   destroy() {
     this.dispose();

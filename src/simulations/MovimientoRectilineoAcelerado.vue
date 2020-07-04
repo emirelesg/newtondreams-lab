@@ -66,8 +66,8 @@ export default {
     draw(frame) {
       if (frame && this.model && this.model.loaded) {
         const { x } = frame;
-        this.model.car.position.x = -37 + x * 100;
-        this.model.weight.position.y = -2 - (x - 0.02) * 100;
+        this.model.car.position.x = -22 + x * 100;
+        this.model.weight.position.y = -2 - (x - this.animation[0].x) * 100;
         this.model.updatePulley();
       }
     },
