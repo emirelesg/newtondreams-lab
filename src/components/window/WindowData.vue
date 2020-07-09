@@ -112,6 +112,9 @@ export default {
     datapoints: () => state.sim.data,
     limit: () => state.sim.displayLimit
   },
+  created() {
+    state.bus.$on('resetWindow', this.reset);
+  },
   activated() {
     this.isActive = true;
     this.$nextTick(function() {
@@ -121,12 +124,10 @@ export default {
       this.clipboard.on('success', this.copySuccess);
       this.clipboard.on('error', this.copyError);
     });
-    state.bus.$on('resetWindow', this.reset);
   },
   deactivated() {
     this.isActive = false;
     this.clipboard.destroy();
-    state.bus.$off('resetWindow', this.reset);
   }
 };
 </script>
