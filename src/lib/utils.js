@@ -63,6 +63,7 @@ export function simulateProjectileMotion({ v0, theta, x0, y0, noise, dt }) {
 
   // Speeds.
   let vx0 = v0 * Math.cos((theta * Math.PI) / 180);
+  let vy = vy0;
   let vy0 = v0 * Math.sin((theta * Math.PI) / 180);
 
   // Bounces.
@@ -77,6 +78,7 @@ export function simulateProjectileMotion({ v0, theta, x0, y0, noise, dt }) {
     // Motion equation for -x and -y.
     y = y0 + vy0 * tShifted - 0.5 * 9.81 * tShifted * tShifted;
     x = x0 + vx0 * tShifted;
+    vy = vy0 - 9.81 * tShifted;
 
     // If ball has reached the ground.
     if (y < 0) {
@@ -107,7 +109,9 @@ export function simulateProjectileMotion({ v0, theta, x0, y0, noise, dt }) {
       signals.push({
         t: round(t, 2),
         x: round(x + guassianNoiseIf(noise, 0.005), 4),
-        y: round(y + guassianNoiseIf(noise, 0.005), 4)
+        y: round(y + guassianNoiseIf(noise, 0.005), 4),
+        vx: round(vx0 + guassianNoiseIf(noise, 0.005), 4),
+        vy: round(vy + guassianNoiseIf(noise, 0.005), 4)
       });
       t += dt;
     }

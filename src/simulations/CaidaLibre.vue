@@ -23,6 +23,10 @@ const signals = {
   y: {
     name: 'Altura',
     units: 'm'
+  },
+  vy: {
+    name: 'Velocidad',
+    units: 'm/s'
   }
 };
 const controls = {
