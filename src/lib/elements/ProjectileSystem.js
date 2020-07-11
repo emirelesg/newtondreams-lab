@@ -1,7 +1,5 @@
 import BaseSystem from './Base';
 import {
-  MeshPhongMaterial,
-  Color,
   Mesh,
   SphereBufferGeometry,
   BufferGeometry,
@@ -33,18 +31,13 @@ export default class ProjectileSystem extends BaseSystem {
     // Projectile.
     this.projectile = new Mesh(
       new SphereBufferGeometry(1.5, 15, 15),
-      new MeshPhongMaterial({
-        color: new Color('#aaaaaa')
-      })
+      this.colors.lightGray
     );
     this.projectile.castShadow = true;
     this.projectile.receiveShadow = true;
 
     // Ruler.
     this.ruler = new Group();
-    this.rulerMaterial = new MeshPhongMaterial({
-      color: new Color('#777777')
-    });
     this.ruler.position.y = -1.49;
     this.ruler.rotation.x = -Math.PI / 2;
     this.loadFont().then(this.drawRuler.bind(this));
@@ -57,30 +50,20 @@ export default class ProjectileSystem extends BaseSystem {
       // Position where a tick will be drawn.
       const x = i * 5;
 
-      // Create a text geometry and compute its bounding box to center it later.
-      const textGeo = this.getTextGeo(`${x} cm`, {
-        size: 0.9,
-        height: 0,
-        curveSegments: 1
-      });
-
       // Build the meshes for the tick and geomtery.
-      const tick = new Mesh(
-        new PlaneBufferGeometry(0.2, 5),
-        this.rulerMaterial
-      );
-      const text = new Mesh(
-        new BufferGeometry().fromGeometry(textGeo),
-        this.rulerMaterial
+      const tick = new Mesh(new PlaneBufferGeometry(0.2, 5), this.colors.gray);
+      const text = this.getText(
+        `${x} cm`,
+        { size: 0.9 },
+        this.colors.gray,
+        'center'
       );
 
       // Position text below tick. Also space ticks using the previously calculated
       // position.
-      var textCenterOffset =
-        -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
       tick.position.x = x - 0.1;
-      text.position.x = tick.position.x + textCenterOffset;
-      text.position.y = -4;
+      text.position.x += tick.position.x;
+      text.position.y += -4;
 
       this.ruler.add(tick, text);
     }
@@ -113,8 +96,6 @@ export default class ProjectileSystem extends BaseSystem {
   destroy() {
     this.dispose(this.ruler);
     this.dispose();
-    this.rulerMaterial.dispose();
-    this.rulerMaterial = null;
     this.ruler = null;
     this.cannon = null;
     this.cannonBody = null;

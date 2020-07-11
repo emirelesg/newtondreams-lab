@@ -2,7 +2,6 @@ import {
   Line,
   BufferGeometry,
   LineBasicMaterial,
-  Color,
   Vector3,
   Matrix4,
   BufferAttribute,
@@ -48,7 +47,9 @@ export default class RailSystemWithPulley extends BaseSystem {
     // Init rope.
     this.rope = new Line(
       new BufferGeometry(),
-      new LineBasicMaterial({ color: new Color('#242424') })
+      new LineBasicMaterial({
+        color: this.colors.darkGray.color.getHex()
+      })
     );
     this.rope.geometry.setAttribute(
       'position',

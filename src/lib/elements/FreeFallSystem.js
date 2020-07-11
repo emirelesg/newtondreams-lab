@@ -1,5 +1,5 @@
 import Base from '@/lib/elements/Base';
-import { Mesh, SphereBufferGeometry, MeshPhongMaterial, Color } from 'three';
+import { Mesh, SphereBufferGeometry } from 'three';
 import { constain } from '@/lib/utils.js';
 
 export default class FreeFallSystem extends Base {
@@ -10,7 +10,7 @@ export default class FreeFallSystem extends Base {
     // Projectile.
     this.projectile = new Mesh(
       new SphereBufferGeometry(1.5, 15, 15),
-      new MeshPhongMaterial({ color: new Color('#aaaaaa') })
+      this.colors.lightGray
     );
     this.projectile.castShadow = true;
     this.projectile.receiveShadow = true;
