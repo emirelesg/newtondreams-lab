@@ -144,6 +144,7 @@ export default {
         const x = t - tAnimation;
 
         // Second order differential equation.
+        // Model obtained from https://apmonitor.com/pdc/index.php/Main/SecondOrderSystems
         const currentTemp =
           tempWater + tempDelta * (1 - (1 + x / ts) * Math.exp(-x / ts));
 
