@@ -33,6 +33,7 @@ export default class ProjectileSystem extends BaseSystem {
       new SphereBufferGeometry(1.5, 15, 15),
       this.colors.lightGray
     );
+    this.projectile.visible = false;
     this.projectile.castShadow = true;
     this.projectile.receiveShadow = true;
 
@@ -90,6 +91,8 @@ export default class ProjectileSystem extends BaseSystem {
     // Cannon.
     this.cannon = cannon;
     this.cannon.rotation.x = -Math.PI / 2;
+
+    this.projectile.visible = true;
 
     this.add(this.cannon, this.cannonBody);
   }
