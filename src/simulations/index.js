@@ -81,5 +81,11 @@ export default [
     path: 'caida_libre',
     component: () =>
       import(/* webpackChunkName: "lab" */ '@/simulations/CaidaLibre.vue')
+  },
+  {
+    name: 'Calorimetría',
+    path: 'calorimetria',
+    component: () =>
+      import(/* webpackChunkName: "lab" */ '@/simulations/Calorimetria.vue')
   }
 ];

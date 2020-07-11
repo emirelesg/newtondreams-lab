@@ -7,6 +7,11 @@
           @input="val => set(key, val)"
           v-if="settings[key].type === 'slider'"
         ></setting-slider>
+        <setting-options
+          :conf="settings[key]"
+          @input="val => set(key, val)"
+          v-if="settings[key].type === 'options'"
+        ></setting-options>
       </v-col>
     </v-row>
   </window-base>
@@ -15,13 +20,15 @@
 <script>
 import { state, mutations } from '@/store/index';
 import SettingSlider from '@/components/window/SettingSlider.vue';
+import SettingOptions from '@/components/window/SettingOptions.vue';
 import WindowBase from '@/components/window/WindowBase.vue';
 
 export default {
   name: 'WindowSettings',
   components: {
     WindowBase,
-    SettingSlider
+    SettingSlider,
+    SettingOptions
   },
   data: () => ({
     slider: 10,
