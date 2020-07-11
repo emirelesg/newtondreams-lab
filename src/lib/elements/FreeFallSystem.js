@@ -12,6 +12,7 @@ export default class FreeFallSystem extends Base {
       new SphereBufferGeometry(1.5, 15, 15),
       this.colors.lightGray
     );
+    this.projectile.visible = false;
     this.projectile.castShadow = true;
     this.projectile.receiveShadow = true;
     this.add(this.projectile);
@@ -49,6 +50,7 @@ export default class FreeFallSystem extends Base {
   onLoad([gripper]) {
     this.gripper = gripper;
     this.gripper.rotation.x = -Math.PI / 2;
+    this.projectile.visible = true;
     this.add(this.gripper);
   }
   destroy() {
