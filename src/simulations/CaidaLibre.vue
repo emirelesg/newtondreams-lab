@@ -66,7 +66,7 @@ export default {
         y0: state.sim.settings.height.value / 100
       };
       this.setAnimationData(
-        simulateProjectileMotion({ ...simOpts, noise: false, dt: 1 / 60 })
+        simulateProjectileMotion({ ...simOpts, noise: false, dt: 1 / 50 })
       );
       this.setSimulationData(
         simulateProjectileMotion({

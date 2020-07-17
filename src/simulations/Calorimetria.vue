@@ -110,7 +110,7 @@ export default {
       );
       this.model.setHotPlateTemp(state.sim.settings.temp.value);
       this.model.setHotPlateMass(masses[state.sim.settings.material.value]);
-      this.setAnimationData(this.simulate(1 / 60, false));
+      this.setAnimationData(this.simulate(1 / 50, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },
     simulate(dt, noise) {

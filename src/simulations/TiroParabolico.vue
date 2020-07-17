@@ -68,7 +68,7 @@ export default {
         y0: 0.0525
       };
       this.setAnimationData(
-        simulateProjectileMotion({ ...simOpts, noise: false, dt: 1 / 60 })
+        simulateProjectileMotion({ ...simOpts, noise: false, dt: 1 / 50 })
       );
       this.setSimulationData(
         simulateProjectileMotion({
