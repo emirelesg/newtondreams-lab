@@ -134,12 +134,12 @@ export default class RailSystemWithPulley extends BaseSystem {
     this.position.x = 35 - 35 * Math.cos(-this.rotation.z);
   }
   destroy() {
-    this.dispose();
     this.rope = null;
     this.car = null;
     this.rail = null;
     this.sensor = null;
     this.weight = null;
     this.pulley = null;
+    this.dispose();
   }
 }

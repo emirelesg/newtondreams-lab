@@ -97,12 +97,12 @@ export default class ProjectileSystem extends BaseSystem {
     this.add(this.cannon, this.cannonBody);
   }
   destroy() {
-    this.dispose(this.ruler);
-    this.dispose();
-    this.ruler = null;
     this.cannon = null;
     this.cannonBody = null;
     this.projectile = null;
     this.path = null;
+    this.dispose(this.ruler);
+    this.ruler = null;
+    this.dispose();
   }
 }

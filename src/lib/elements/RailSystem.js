@@ -46,10 +46,10 @@ export default class RailSystem extends BaseSystem {
     this.position.x = 50 - 50 * Math.cos(-this.rotation.z);
   }
   destroy() {
-    this.dispose();
     this.car = null;
     this.rail = null;
     this.sensor = null;
     this.stopper = null;
+    this.dispose();
   }
 }

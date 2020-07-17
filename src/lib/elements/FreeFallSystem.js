@@ -54,8 +54,8 @@ export default class FreeFallSystem extends Base {
     this.add(this.gripper);
   }
   destroy() {
-    this.dispose();
     this.gripper = null;
     this.projectile = null;
+    this.dispose();
   }
 }

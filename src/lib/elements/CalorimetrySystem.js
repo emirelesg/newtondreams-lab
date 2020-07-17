@@ -326,10 +326,10 @@ export default class CalorimetrySystem extends Base {
     this.thermometerLevel = null;
     this.dispose(this.thermometer);
 
-    this.dispose();
     this.cup = null;
     this.hotPlate = null;
     this.lcd = null;
     this.thermometer = null;
+    this.dispose();
   }
 }
