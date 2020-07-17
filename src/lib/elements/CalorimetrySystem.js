@@ -28,7 +28,7 @@ export default class CalorimetrySystem extends Base {
 
     // Weight object.
     this.weight = new Mesh(
-      new CylinderBufferGeometry(1, 1, 1, 15),
+      new CylinderBufferGeometry(0.75, 0.75, 1, 15),
       new MeshPhongMaterial({ color: new Color(weightColor) })
     );
     this.weight.visible = false;
