@@ -87,5 +87,11 @@ export default [
     path: 'calorimetria',
     component: () =>
       import(/* webpackChunkName: "lab" */ '@/simulations/Calorimetria.vue')
+  },
+  {
+    name: 'Péndulo Simple',
+    path: 'pendulo_simple',
+    component: () =>
+      import(/* webpackChunkName: "lab" */ '@/simulations/PenduloSimple.vue')
   }
 ];

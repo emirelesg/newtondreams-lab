@@ -1,0 +1,355 @@
+{
+  "accessors": [
+    {
+      "name": "b_gripper_horizonal_rod_001_-Mesh_0_positions",
+      "componentType": 5126,
+      "count": 78,
+      "min": [
+        -2.5,
+        10,
+        37.518226623535156
+      ],
+      "max": [
+        2.5,
+        32.5,
+        42.481773376464844
+      ],
+      "type": "VEC3",
+      "bufferView": 0,
+      "byteOffset": 0
+    },
+    {
+      "name": "b_gripper_horizonal_rod_001_-Mesh_0_indices",
+      "componentType": 5123,
+      "count": 300,
+      "min": [
+        0
+      ],
+      "max": [
+        77
+      ],
+      "type": "SCALAR",
+      "bufferView": 1,
+      "byteOffset": 0
+    },
+    {
+      "name": "b_gripper_connector_block_001_-Mesh_0_positions",
+      "componentType": 5126,
+      "count": 8,
+      "min": [
+        -12.5,
+        32.5,
+        27.5
+      ],
+      "max": [
+        12.5,
+        57.5,
+        52.5
+      ],
+      "type": "VEC3",
+      "bufferView": 0,
+      "byteOffset": 936
+    },
+    {
+      "name": "b_gripper_connector_block_001_-Mesh_0_indices",
+      "componentType": 5123,
+      "count": 36,
+      "min": [
+        0
+      ],
+      "max": [
+        7
+      ],
+      "type": "SCALAR",
+      "bufferView": 1,
+      "byteOffset": 600
+    },
+    {
+      "name": "b_gripper_vertical_rod_001_-Mesh_0_positions",
+      "componentType": 5126,
+      "count": 52,
+      "min": [
+        -2.5,
+        42.518226623535156,
+        0
+      ],
+      "max": [
+        2.5,
+        47.481773376464844,
+        500
+      ],
+      "type": "VEC3",
+      "bufferView": 0,
+      "byteOffset": 1032
+    },
+    {
+      "name": "b_gripper_vertical_rod_001_-Mesh_0_indices",
+      "componentType": 5123,
+      "count": 300,
+      "min": [
+        0
+      ],
+      "max": [
+        51
+      ],
+      "type": "SCALAR",
+      "bufferView": 1,
+      "byteOffset": 672
+    },
+    {
+      "name": "b_pendulum_rotation_body_001_-Mesh_0_positions",
+      "componentType": 5126,
+      "count": 64,
+      "min": [
+        -10,
+        -10,
+        30
+      ],
+      "max": [
+        10,
+        10,
+        50
+      ],
+      "type": "VEC3",
+      "bufferView": 0,
+      "byteOffset": 1656
+    },
+    {
+      "name": "b_pendulum_rotation_body_001_-Mesh_0_indices",
+      "componentType": 5123,
+      "count": 372,
+      "min": [
+        0
+      ],
+      "max": [
+        63
+      ],
+      "type": "SCALAR",
+      "bufferView": 1,
+      "byteOffset": 1272
+    },
+    {
+      "name": "b_gripper_base_001_-Mesh_0_positions",
+      "componentType": 5126,
+      "count": 8,
+      "min": [
+        -100,
+        -100,
+        -3
+      ],
+      "max": [
+        100,
+        100,
+        0
+      ],
+      "type": "VEC3",
+      "bufferView": 0,
+      "byteOffset": 2424
+    },
+    {
+      "name": "b_gripper_base_001_-Mesh_0_indices",
+      "componentType": 5123,
+      "count": 36,
+      "min": [
+        0
+      ],
+      "max": [
+        7
+      ],
+      "type": "SCALAR",
+      "bufferView": 1,
+      "byteOffset": 2016
+    }
+  ],
+  "asset": {
+    "generator": "obj2gltf",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "name": "pendulum",
+      "byteLength": 4608,
+      "uri": "data:application/octet-stream;base64,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IAAfACEAHQAfAB4AIQAiACMAHwAiACEAIgAkACMAIwAkACUAJAAmACUAJQAmACcAJgAoACcAJwAoACkAKAAqACkAKQAqACsAKgAsACsAKwAsAC0ALAAuAC0ALQAuAC8ALgAwAC8ALwAwADEAMAAyADEAMQAyADMAMgAAADMAMwAAAAIAKAAsACoAFwAVABkAGQAVABsAGwAVAB0AJAAuACYAJgAuACgAKAAuACwALgAyADAAIgAAACQAJAAAAC4ALgAAADIACAAUAAkACQAUAA4ADgAUABIAEgAUABUAHQAEAB8AHwAEACIAAAAEAAEAIgAEAAAABAAMAAYAEAAMABQAFQAMAB0AFAAMABUAHQAMAAQANAA1ADYANwA4ADkANwA5ADoANwA6ADsAPAA9AD4APAA+AD8APAA/AEAAPABAADUAPAA1ADQAQQBCADcAQwA8AEQARQA9ADwARQA8AEMARgBHAEgARgBIAEEARgBBADcASQA7AD0ASQBFAEoASQA9AEUASwBJAEwASwBNAEYASwA3ADsASwA7AEkASwBGADcAAAABAAIAAAACAAMABAAAAAMABAADAAUABgAEAAUABgAFAAcAAQAGAAcAAQAHAAIAAQAAAAQAAQAEAAYAAwACAAUABQACAAcAAAABAAIAAgABAAMAAQAEAAMABQAGAAcAAwAEAAgABAAJAAgABwAKAAsACAAJAAwABgAKAAcACQANAAwACgAOAAsADAANAA8ACwAQABEADQASAA8ADwASABMADgAQAAsAEQAUABUAEgAWABMAEwAWABcAEAAUABEAFQAYABkAFwAaABsAFgAaABcAFAAYABUAGwAcAB0AGgAcABsAGQAeAB8AHAAGAB0AGAAeABkAHQAGAAUAHwAgACEAHgAgAB8AIQAiACMAIAAiACEAIwAkACUAIgAkACMAJQAmACcAJAAmACUAJwAoACkAJgAoACcAKAAqACkAKQAqACsAKgAsACsAKwAsAC0ALAAuAC0ALQAuAC8ALgAwAC8ALwAwADEAMAAyADEAMQAyADMAMgAAADMAMwAAAAIABAANAAkAMAAaADIAMgAaAAAAAAAaAAEAAQAaAAQADQAaABIAEgAaABYABAAaAA0AJAAiACYAJgAiACgAKAAiACoAKgAiACwAGgAGABwABgAQAAoACgAQAA4AFAAQABgAGAAQAB4AHgAQACAAIAAQACIALAAQAC4ALgAQADAAMAAQABoAGgAQAAYAIgAQACwADwAIAAwAGwAxADMAGwAzAAIAGwACAAMAGwADAAgAGwAPABMAGwATABcAGwAIAA8AIwAlACcAIwAnACkAIwApACsAIwArAC0ABQAbAB0AEQAFAAcAEQAHAAsAEQAVABkAEQAZAB8AEQAfACEAEQAhACMAEQAtAC8AEQAvADEAEQAxABsAEQAbAAUAEQAjAC0AAAABAAIAAgABAAMAAwABAAQABQAGAAcAAQAIAAQABgAJAAcABAAKAAsACAAKAAQABwAMAA0ACQAMAAcACwAOAA8ACgAOAAsADwAOABAADQARABIADAARAA0ADgATABAAEgAUABUAEQAUABIAEAAWABcAFwAWABgAEwAWABAAFQAZABoAFAAZABUAFgAbABgAGgAcAB0AGQAcABoAGAAeAB8AGwAeABgAHQAgACEAHAAgAB0AHwAiACMAIwAiACQAHgAiAB8AIAAlACEAIQAlACYAIgAnACQAJQAoACYAJAApACoAJgAoACsAJwApACQAKgAsAC0AKAAuACsAKwAuAC8AKQAsACoALQAGAAUALAAGAC0ALgAwAC8ALwAwADEAMAAyADEAMQAyADMAMgA0ADMAMwA0ADUANAA2ADUANQA2ADcANgA4ADcANwA4ADkAOAA6ADkAOQA6ADsAOgA8ADsAOwA8AD0APAA+AD0APQA+AD8APgAAAD8APwAAAAIAMAAuADIAMgA2ADQANgA6ADgAJQAgACgAKAAgAC4AOgA+ADwAMgA+ADYALgA+ADIANgA+ADoAGQAUABwAHAAUACAAIAAUAC4APgABAAAALgARAD4APgARAAEAFAARAC4AAQAKAAgAAQAOAAoABgAsAAkACQAsAAwADAAsABEAEwAbABYAKQAnACwAEQAnAAEAAQAnAA4ALAAnABEAEwAeABsADgAiABMAJwAiAA4AEwAiAB4ALwAxADMANwAzADUAOwA3ADkAIQAmACsAIQArAC8APwA7AD0APwAzADcAPwAvADMAPwA3ADsAFQAaAB0AFQAdACEAFQAhAC8AAwA/AAIAEgAvAD8AEgA/AAMAEgAVAC8ACwADAAQADwADAAsALQAFAAcALQAHAA0ALQANABIAGAAQABcAJAAqAC0AJAASAAMAJAADAA8AJAAtABIAHwAQABgAIwAPABAAIwAkAA8AIwAQAB8AAAABAAIAAAACAAMABAAAAAMABAADAAUABgAEAAUABgAFAAcAAQAGAAcAAQAHAAIAAQAAAAQAAQAEAAYAAwACAAUABQACAAcA"
+    }
+  ],
+  "bufferViews": [
+    {
+      "name": "bufferView_0",
+      "buffer": 0,
+      "byteLength": 2520,
+      "byteOffset": 0,
+      "byteStride": 12,
+      "target": 34962
+    },
+    {
+      "name": "bufferView_1",
+      "buffer": 0,
+      "byteLength": 2088,
+      "byteOffset": 2520,
+      "target": 34963
+    }
+  ],
+  "materials": [
+    {
+      "name": "color_cccccc",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    },
+    {
+      "name": "color_265ad4",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.14901961386203766,
+          0.3529411852359772,
+          0.8313725590705872,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    },
+    {
+      "name": "color_545454",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.3294117748737335,
+          0.3294117748737335,
+          0.3294117748737335,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "name": "b_gripper_horizonal_rod_001_-Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0
+          },
+          "indices": 1,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "b_gripper_connector_block_001_-Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 2
+          },
+          "indices": 3,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "b_gripper_vertical_rod_001_-Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4
+          },
+          "indices": 5,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "b_pendulum_rotation_body_001_-Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "b_gripper_base_001_-Mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 8
+          },
+          "indices": 9,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "b_gripper_horizonal_rod_001_",
+      "mesh": 0
+    },
+    {
+      "name": "b_gripper_connector_block_001_",
+      "mesh": 1
+    },
+    {
+      "name": "b_gripper_vertical_rod_001_",
+      "mesh": 2
+    },
+    {
+      "name": "b_pendulum_rotation_body_001_",
+      "mesh": 3
+    },
+    {
+      "name": "b_gripper_base_001_",
+      "mesh": 4
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ]
+}
