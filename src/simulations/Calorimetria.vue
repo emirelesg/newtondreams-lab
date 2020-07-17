@@ -1,6 +1,10 @@
 <template>
   <div ref="parent" class="full">
-    <sim-header title="Calorimetría" description="*descripción*"> </sim-header>
+    <sim-header
+      title="Calorimetría"
+      description="Determina el calor específico del material."
+    >
+    </sim-header>
     <sim-controls @input="handleControls"></sim-controls>
   </div>
 </template>
@@ -67,16 +71,16 @@ const weightVol = (weightDiameter / 2) * Math.PI * Math.PI * weightHeight;
 
 // Densities obtained from https://www.engineersedge.com/materials/densities_of_metals_and_elements_table_13976.htm
 const masses = {
-  copper: round(8.96 * weightVol, 1),
+  copper: round(8.92 * weightVol, 1),
   brass: round(8.5 * weightVol, 1),
   aluminium: round(2.7 * weightVol, 1)
 };
 
 const specificHeat = {
-  water: 4.18,
-  copper: 0.685,
+  water: 4.186,
+  copper: 0.39,
   brass: 0.377,
-  aluminium: 0.903
+  aluminium: 0.91
 };
 
 export default {
