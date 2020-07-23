@@ -65,9 +65,9 @@ const colors = {
   aluminium: '#AFAFB1'
 };
 
-const weightRadius = 0.75;
-const weightHeight = 1;
-const weightVol = weightRadius * Math.PI * Math.PI * weightHeight;
+const weightRadius = 1;
+const weightHeight = 2.5;
+const weightVol = weightRadius * weightRadius * Math.PI * weightHeight;
 
 // Densities obtained from https://www.engineersedge.com/materials/densities_of_metals_and_elements_table_13976.htm
 const masses = {
