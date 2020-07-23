@@ -4,6 +4,7 @@
     <div class="body-2 mb-5">
       {{ description }}
     </div>
+    <div v-if="note !== ''" class="caption mt-auto">Nota: {{ note }}</div>
     <slot></slot>
   </div>
 </template>
@@ -13,7 +14,8 @@ export default {
   name: 'SimHeader',
   props: {
     title: { required: true, type: String },
-    description: { required: true, type: String }
+    description: { required: true, type: String },
+    note: { required: false, type: String, default: '' }
   }
 };
 </script>
@@ -23,6 +25,7 @@ export default {
   position: absolute;
   padding: 16px;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -3,6 +3,7 @@
     <sim-header
       title="Péndulo Simple"
       description="Determina la aceleración debida a la gravedad."
+      note="El péndulo oscilará durante 4 segundos."
     >
     </sim-header>
     <sim-controls @input="handleControls"></sim-controls>
