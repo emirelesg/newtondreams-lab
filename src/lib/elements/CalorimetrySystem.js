@@ -307,11 +307,7 @@ export default class CalorimetrySystem extends Base {
     // Place a circle plane insde the cup to fake it has water.
     const water = new Mesh(
       new CircleBufferGeometry(39.5, 10),
-      new MeshPhongMaterial({
-        color: new Color('#20a4d4'),
-        transparent: true,
-        opacity: 0.5
-      })
+      this.colors.water
     );
     water.position.z = 50;
     this.cup.add(water);

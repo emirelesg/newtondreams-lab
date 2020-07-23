@@ -34,7 +34,12 @@ export default class BaseSystem extends Object3D {
     this.colors = {
       lightGray: new MeshPhongMaterial({ color: new Color('#AAAAAA') }),
       gray: new MeshPhongMaterial({ color: new Color('#777777') }),
-      darkGray: new MeshPhongMaterial({ color: new Color('#3a3a3a') })
+      darkGray: new MeshPhongMaterial({ color: new Color('#3a3a3a') }),
+      water: new MeshPhongMaterial({
+        color: new Color('#20a4d4'),
+        transparent: true,
+        opacity: 0.5
+      })
     };
   }
   load() {
