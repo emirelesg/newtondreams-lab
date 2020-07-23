@@ -128,8 +128,8 @@ export default {
 
       // Second order system.
       let t = 0;
-      const ts = 0.15; // Time constant of the system. Determines the speed.
-      const tEnd = ts * 10; // Time until the system stabilizes.
+      const ts = 0.3; // Time constant of the system. Determines the speed.
+      const tEnd = ts * 8; // Time until the system stabilizes.
       const tAnimation = this.model.animationLength / 60; // Duration of the animation, which is always played back at 60fps.
 
       let signals = [];
