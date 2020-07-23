@@ -93,5 +93,11 @@ export default [
     path: 'pendulo_simple',
     component: () =>
       import(/* webpackChunkName: "lab" */ '@/simulations/PenduloSimple.vue')
+  },
+  {
+    name: 'Energía',
+    path: 'energia',
+    component: () =>
+      import(/* webpackChunkName: "lab" */ '@/simulations/Energia.vue')
   }
 ];
