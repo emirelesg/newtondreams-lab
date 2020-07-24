@@ -99,5 +99,11 @@ export default [
     path: 'energia',
     component: () =>
       import(/* webpackChunkName: "lab" */ '@/simulations/Energia.vue')
+  },
+  {
+    name: 'Peso Aparente',
+    path: 'peso_aparente',
+    component: () =>
+      import(/* webpackChunkName: "lab" */ '@/simulations/PesoAparente.vue')
   }
 ];
