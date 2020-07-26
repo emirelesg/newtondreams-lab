@@ -131,7 +131,7 @@ export default {
         });
 
         // Continue sinking and advancing time.
-        posY -= 0.1;
+        posY -= 5 * dt;
         t += dt;
       }
       return signals;
