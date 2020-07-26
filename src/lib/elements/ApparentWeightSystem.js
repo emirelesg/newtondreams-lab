@@ -98,7 +98,7 @@ export default class ApparentWeightSystem extends Base {
     const units = this.getText(
       'Gramos',
       { size: 0.5 },
-      this.colors.gray,
+      this.colors.darkGray,
       'center'
     );
     units.position.y += 1.25;
@@ -179,8 +179,21 @@ export default class ApparentWeightSystem extends Base {
     this.weight.visible = true;
   }
   destroy() {
+    // Labes are remvoed first since they are added in the dynModel.
+    this.dispose(this.dynLabels);
+    this.dynLabels = null;
+
+    // Next remove the model.
+    this.dispose(this.dynModel);
+    this.dynModel = null;
+
+    // Finally remove the dyn group.
+    this.dispose(this.dyn);
+    this.dyn = null;
+
     this.cup = null;
     this.water = null;
+    this.weight = null;
     this.dispose();
   }
 }
