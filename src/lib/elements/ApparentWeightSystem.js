@@ -37,8 +37,9 @@ export default class ApparentWeightSystem extends Base {
     // Weight. The
     this.weight = new Mesh(
       new CylinderBufferGeometry(1, 1, this.weightHeight, 15),
-      new MeshPhongMaterial({ color: new Color('#ff0000') })
+      new MeshPhongMaterial({ color: new Color('#000000') })
     );
+    this.weight.visible = false;
     this.weight.receiveShadow = true;
     this.weight.castShadow = true;
 
@@ -76,9 +77,6 @@ export default class ApparentWeightSystem extends Base {
     // in the same position while everything else shifts up or down.
     // 3 is the default space beween hooks.
     this.dynModel.position.y = h + 3 + this.weightHeight;
-
-    // Shift the text up by the same ammount.
-    // this.dynLabels.position.y = this.dynModel.position.y + 9.5;
   }
   setWaterHeight(h) {
     // Update the vertices of the geometry to the new height.
@@ -100,11 +98,10 @@ export default class ApparentWeightSystem extends Base {
     const units = this.getText(
       'Gramos',
       { size: 0.5 },
-      this.colors.darkGray,
+      this.colors.gray,
       'center'
     );
-    units.position.y += 1;
-    units.position.z += 0.5;
+    units.position.y += 1.25;
     this.dynLabels.add(units);
 
     // Create ticks and labels.
@@ -121,24 +118,20 @@ export default class ApparentWeightSystem extends Base {
         const text = this.getText(
           `${g}`,
           { size: 0.6 },
-          this.colors.gray,
+          this.colors.darkGray,
           'left'
         );
         text.position.y -= h;
         text.position.x += 0.75;
-        text.position.z += 0.5;
         this.dynLabels.add(text);
-        tick.position.set(0, -h, 0.5);
+        tick.position.set(0, -h, 0);
       } else {
         // Smaller tick for the smaller increments.
         tick = new Mesh(new PlaneBufferGeometry(0.3, 0.05), this.colors.gray);
-        tick.position.set(-0.1, -h, 0.5);
+        tick.position.set(-0.1, -h, 0);
       }
       this.dynLabels.add(tick);
     }
-    this.dynLabels.rotation.x += Math.PI / 2;
-    this.dynLabels.scale.multiplyScalar(10);
-    this.dynLabels.position.set(0, 0, 95);
   }
   onLoad([cup, dynamometer]) {
     // Cup.
@@ -156,25 +149,34 @@ export default class ApparentWeightSystem extends Base {
     this.dynModel = dynamometer;
     this.dynModel.rotation.x = -Math.PI / 2;
 
-    // Remove shadows from the indicator and body.
-    const indicator = this.dynModel.children.find(
-      obj => obj.name === 'b_dyn_indicator_001_'
-    );
-    indicator.castShadow = false;
-    indicator.receiveShadow = false;
+    // Remove shadows from the indicator, body, and bg.
+    ['b_dyn_indicator_001_', 'b_dyn_bg_001_'].forEach(name => {
+      let obj = this.dynModel.children.find(obj => obj.name === name);
+      if (obj) {
+        obj.castShadow = false;
+        obj.receiveShadow = false;
+      }
+    });
     const body = this.dynModel.children.find(
       obj => obj.name === 'b_dyn_body_001_'
     );
     body.receiveShadow = false;
 
-    // Create the hole where the indicator is supposed to slide.
-    const bg = new Mesh(new PlaneBufferGeometry(2, 85), this.colors.darkGray);
-    bg.rotation.x = Math.PI / 2;
-    bg.position.set(-10, -7.5 + 2.5, 95 - 85 / 2 + 5 / 2);
+    // Create the hole where the indicator is supposed to slide at z = -5.75;
+    const slit = new Mesh(new PlaneBufferGeometry(2, 85), this.colors.darkGray);
+    slit.rotation.x = Math.PI / 2;
+    slit.position.set(-10, -4.5 - 0.5, 95 - 85 / 2 + 5 / 2);
+
+    // Position the labels at z = -5.75;
+    this.dynLabels.rotation.x = Math.PI / 2;
+    this.dynLabels.scale.multiplyScalar(10);
+    this.dynLabels.position.set(0, -4.5 - 0.5, 95);
 
     this.dyn.add(this.dynModel);
-    this.dynModel.add(bg, this.dynLabels);
+    this.dynModel.add(slit, this.dynLabels);
     this.add(this.cup);
+
+    this.weight.visible = true;
   }
   destroy() {
     this.cup = null;
