@@ -21,6 +21,7 @@ export default class PendulumSystem extends Base {
         color: new Color('#CDB06A')
       })
     );
+    this.weightRef.visible = false;
     this.weightRef.castShadow = true;
     this.weightRef.receiveShadow = true;
     this.rod.add(this.weightRef);
@@ -75,6 +76,7 @@ export default class PendulumSystem extends Base {
     // Base.
     this.base = base;
     this.base.rotation.x = -Math.PI / 2;
+    this.weightRef.visible = true;
     this.add(this.base);
   }
   destroy() {
