@@ -75,7 +75,7 @@ export default {
     setup() {
       this.model = new ApparentWeightSystem();
       this.app.scene.add(this.model);
-      this.app.scene.position.y = -15;
+      this.app.scene.position.y = -10;
       return this.model.load();
     },
     reset() {
