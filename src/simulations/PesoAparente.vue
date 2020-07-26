@@ -13,11 +13,21 @@
 import SimControls from '@/components/sim/SimControls.vue';
 import SimHeader from '@/components/sim/SimHeader.vue';
 import SimMixin from '@/components/sim/SimMixin.js';
-import ApparentWeight from '@/lib/elements/ApparentWeight.js';
+import ApparentWeightSystem from '@/lib/elements/ApparentWeightSystem.js';
 import { state } from '@/store/index.js';
-import { round } from '@/lib/utils.js';
+import { round, guassianNoiseIf } from '@/lib/utils.js';
 
-const signals = {};
+const signals = {
+  t: {
+    name: 'Tiempo',
+    units: 's',
+    isTime: true
+  },
+  mass: {
+    name: 'Masa',
+    units: 'g'
+  }
+};
 const controls = {
   material: {
     type: 'options',
@@ -63,9 +73,9 @@ export default {
   }),
   methods: {
     setup() {
-      this.model = new ApparentWeight();
+      this.model = new ApparentWeightSystem();
       this.app.scene.add(this.model);
-      this.app.scene.position.y = -10;
+      this.app.scene.position.y = -15;
       return this.model.load();
     },
     reset() {
@@ -75,27 +85,54 @@ export default {
       this.setAnimationData(this.simulate(1 / 50, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },
-    draw(frame, i) {
+    draw(frame) {
       if (frame && this.model && this.model.loaded) {
-        this.model.setWaterHeight(i * 0.06);
+        const { mass, posY, waterLevel } = frame;
+        this.model.setWaterHeight(waterLevel);
+        this.model.setDynWeight(mass);
+        this.model.dyn.position.y = posY + this.model.cupThickness;
       }
     },
-    simulate(dt) {
+    simulate(dt, noise) {
       // Based on https://www.fisic.ch/contenidos/mec%C3%A1nica-de-fluidos/principio-de-arquimides/
       const weightMass = masses[state.sim.settings.material.value]; // g
       const waterDensity = 1; // g / cm³
-      const apparentMass = weightMass - weightVol * waterDensity; // g
-
       // Density can be calculated by doing: waterDensity / (1 - apparentMass / weightMass)
       // console.log(1 / (1 - apparentMass / weightMass));
-      apparentMass;
-      displacedHeight;
+
+      // Y position of the weight, referenced to the top of the liquid.
+      let posY = 10;
+
+      // Amount the water level has increased.
+      let waterLevel = 0;
+
+      // Mass measured by the dynamometer.
+      let mass = weightMass;
 
       let signals = [];
-      for (let t = 0; t < 1; t += dt) {
+      let t = 0;
+
+      // Sink the weight until it is at the center of the water.
+      const { waterHeight } = this.model;
+      const finalPosY = (waterHeight - weightHeight) / 2;
+      while (posY > finalPosY && t < 5) {
+        // Interpolate the final water level and apparent mass while the weight is sinking.
+        if (posY < waterHeight && posY > waterHeight - weightHeight) {
+          const sunkPercent =
+            1 - (posY - (waterHeight - weightHeight)) / weightHeight;
+          waterLevel = sunkPercent * displacedHeight;
+          mass = weightMass - sunkPercent * weightVol * waterDensity;
+        }
         signals.push({
-          t
+          t: round(t, 2),
+          mass: round(mass + guassianNoiseIf(noise, 0.2), 4),
+          posY,
+          waterLevel
         });
+
+        // Continue sinking and advancing time.
+        posY -= 0.1;
+        t += dt;
       }
       return signals;
     }

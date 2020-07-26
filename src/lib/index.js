@@ -70,7 +70,7 @@ class App {
     // this.controls.minAzimuthAngle = -Math.PI / 2;
 
     // // Limit the amount fo zoom.
-    this.controls.minDistance = 75;
+    this.controls.minDistance = 0;
     this.controls.maxDistance = 275;
 
     this.mouse = {
