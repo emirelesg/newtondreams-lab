@@ -38,7 +38,30 @@ const controls = {
       { text: 'Aluminio', value: 'aluminium' }
     ],
     value: 'copper'
+  },
+  liquid: {
+    type: 'options',
+    label: 'Líquido',
+    values: [
+      { text: 'Agua (1000 kg/m³)', value: 'water' },
+      { text: 'Aceite de Oliva (911 kg/m³)', value: 'oliveOil' },
+      { text: 'Alcohol Etílico (785.1 kg/m³)', value: 'alcohol' }
+    ],
+    value: 'water'
   }
+};
+
+const liquidColors = {
+  water: '#20a4d4',
+  oliveOil: '#ccbd2d',
+  alcohol: '#c1dee8'
+};
+
+// Source: https://www.engineeringtoolbox.com/liquids-densities-d_743.html
+const liquidDensities = {
+  water: 1,
+  oliveOil: 0.911,
+  alcohol: 0.7851
 };
 
 const colors = {
@@ -82,6 +105,9 @@ export default {
       this.model.weight.material.color.setStyle(
         colors[state.sim.settings.material.value]
       );
+      this.model.water.material.color.setStyle(
+        liquidColors[state.sim.settings.liquid.value]
+      );
       this.setAnimationData(this.simulate(1 / 50, false));
       this.setSimulationData(this.simulate(state.sim.sampleTime, true));
     },
@@ -96,9 +122,12 @@ export default {
     simulate(dt, noise) {
       // Based on https://www.fisic.ch/contenidos/mec%C3%A1nica-de-fluidos/principio-de-arquimides/
       const weightMass = masses[state.sim.settings.material.value]; // g
-      const waterDensity = 1; // g / cm³
-      // Density can be calculated by doing: waterDensity / (1 - apparentMass / weightMass)
-      // console.log(1 / (1 - apparentMass / weightMass));
+      const liquidDensity = liquidDensities[state.sim.settings.liquid.value]; // g / cm³
+      // Density can be calculated by doing: liquidDensity / (1 - apparentMass / weightMass)
+      // console.log(
+      //   liquidDensity /
+      //     (1 - (weightMass - weightVol * liquidDensity) / weightMass)
+      // );
 
       // Y position of the weight, referenced to the top of the liquid.
       let posY = 10;
@@ -121,7 +150,7 @@ export default {
           const sunkPercent =
             1 - (posY - (waterHeight - weightHeight)) / weightHeight;
           waterLevel = sunkPercent * displacedHeight;
-          mass = weightMass - sunkPercent * weightVol * waterDensity;
+          mass = weightMass - sunkPercent * weightVol * liquidDensity;
         }
         signals.push({
           t: round(t, 2),
