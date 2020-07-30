@@ -24,7 +24,7 @@ const signals = {
     isTime: true
   },
   mass: {
-    name: 'Masa',
+    name: 'Masa Aparente',
     units: 'g'
   }
 };
