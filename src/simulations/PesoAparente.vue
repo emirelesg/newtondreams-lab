@@ -97,6 +97,7 @@ export default {
   methods: {
     setup() {
       this.model = new ApparentWeightSystem();
+      this.app.zoom(0.75);
       this.app.scene.add(this.model);
       this.app.scene.position.y = -10;
       return this.model.load();
