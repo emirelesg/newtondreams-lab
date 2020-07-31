@@ -93,8 +93,8 @@ class App {
     this.scene.background = new Color('#F5F7FA');
     this.scene.fog = new Fog(
       this.scene.background,
-      this.controls.maxDistance,
-      this.controls.maxDistance * 1.7
+      this.controls.maxDistance * 0.8,
+      this.controls.maxDistance * 1.6
     );
 
     // Lights up the scene globally.
