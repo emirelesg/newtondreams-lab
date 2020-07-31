@@ -53,6 +53,7 @@ export default class ThermalExpansionSystem extends Base {
       this.fires.children[i].position.x = -4 + i * 1;
     }
     this.fires.position.y = 2 + 0.75 / 2;
+    this.fires.visible = false;
     this.rescaleFires();
 
     this.add(this.rod, this.fires);
@@ -119,6 +120,7 @@ export default class ThermalExpansionSystem extends Base {
   }
 
   updateFires(delta, opacity) {
+    if (!this.fires.visible) this.fires.visible = true;
     this.fires.traverse(obj => {
       if (obj.material && obj.material.update) {
         obj.material.setOpacity(opacity);
