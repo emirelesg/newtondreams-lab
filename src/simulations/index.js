@@ -105,5 +105,11 @@ export default [
     path: 'peso_aparente',
     component: () =>
       import(/* webpackChunkName: "lab" */ '@/simulations/PesoAparente.vue')
+  },
+  {
+    name: 'Dilatación Lineal',
+    path: 'dilatacion_lineal',
+    component: () =>
+      import(/* webpackChunkName: "lab" */ '@/simulations/DilatacionLineal.vue')
   }
 ];
