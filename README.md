@@ -1,4 +1,4 @@
-# newtondreams-lab
+# NewtonDreams Lab
 
 ## Project setup
 ```
