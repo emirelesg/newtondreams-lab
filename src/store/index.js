@@ -108,7 +108,7 @@ export const mutations = {
 
 export const actions = {
   authenticate: password => {
-    if (password === 'udem') {
+    if (password === 'udem3205') {
       const token = Array(36)
         .fill()
         .map(() =>
