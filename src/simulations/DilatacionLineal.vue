@@ -2,7 +2,8 @@
   <div ref="parent" class="full">
     <sim-header
       title="Dilatación Lineal"
-      description=" Analiza la dilatación térmica de distintos materiales."
+      description="Analiza la dilatación térmica de distintos materiales."
+      note="La longitud inicial es de 18cm."
     >
     </sim-header>
     <sim-controls @input="handleControls"> </sim-controls>
